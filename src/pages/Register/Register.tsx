@@ -10,30 +10,39 @@ import classnames from "classnames";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import dayjs from "dayjs";
 import classNames from "classnames";
+import { AppDispatch } from "../../redux/configStore";
+import { postSignupUser } from "../../redux/Reducers/userReducer";
+
+
 
 type Props = {
 
 };
 
 interface Register {
-    name: string;
-    email:string;
-    password: string;
-    phone: number;
-    birthday: string;
-    gender?: true
+  id?: number;
+  name?: string;
+  email?: string;
+  password?: string;
+  phone?: string;
+  birthday?: string;
+  gender?: boolean;
+  role?: string;
 }
 export default function Register({}: Props) {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const [isShowPass, setIsShowPass] = useState(false);
 
 //   const { isExitEmail, handleCheckEmail } = useCheckEmailExit();
-  const [day, setDay] = useState();
+  const [day, setDay] = useState("1/1/2022");
 
 //   useEffect(() => {
 //     dispatch(getUserList());
 //   }, []);
+
+
+
 
   const schema = object({
     email: 
@@ -66,9 +75,9 @@ export default function Register({}: Props) {
       }),
     birthday: string().required("Ngày sinh không được để trống"),
     gender: boolean().required("Giới tính không được để trống"),
-    address: string().required("Địa chỉ không được để trống"),
   });
 
+  
   const {
     register,
     handleSubmit,
@@ -77,9 +86,19 @@ export default function Register({}: Props) {
     resolver: yupResolver(schema),
     mode: "onTouched",
   });
+  const onSubmit = handleSubmit((valuse) => {
+    
+    console.log(valuse);
+    const action = postSignupUser(valuse);
+    dispatch(action);
+
+  });
+
+
+
   return (
     <form
-      id="form"
+      id="form" onSubmit={onSubmit}
     //   onSubmit={handleSubmit((value) => {
     //     const thongTinDangKy = { ...value, birthday: day };
 
@@ -177,12 +196,12 @@ export default function Register({}: Props) {
               </div>
               <div className="h-24">
                 <input
-                //   {...register("birthday")}
-                //   onChange={(e) =>
-                //     setDay(
-                //       dayjs(e.target.value).format("YYYY-MM-DDTHH:mm:ss.SSSZ")
-                //     )
-                //   }
+                  {...register("birthday")}
+                  onChange={(e) =>
+                    setDay(
+                      dayjs(e.target.value).format("YYYY-MM-DDTHH:mm:ss.SSSZ")
+                    )
+                  }
                   type="date"
                   className="block border border-grey-light w-full p-3 rounded mb-0"
                   placeholder="Birthday"

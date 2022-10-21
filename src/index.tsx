@@ -31,6 +31,7 @@ import HomeTemplate from "./templates/HomeTemplate";
 import Login from "./pages/Login/Login";
 import DetailRoom from "./pages/DetailRoom/DetailRoom";
 import DashBoard from "./pages/AdminPages/Dashboard/DashBoard";
+import Register from "./pages/Register/Register";
 // import HomeTemplate from "./templates/HomeTemplate";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
@@ -43,6 +44,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Route path="" element={<HomeTemplate />}>
             <Route index element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
             <Route path="detailRoom">
               <Route path=":id" element={<DetailRoom />} />
