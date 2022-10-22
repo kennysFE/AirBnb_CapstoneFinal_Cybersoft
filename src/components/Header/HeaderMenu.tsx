@@ -1,11 +1,53 @@
 import React, { useState } from "react";
+import { useSelector , useDispatch } from 'react-redux';
 import { Dropdown, Menu } from "antd";
 import { FaBars, FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import {
+  ACCESS_TOKEN,
+  getStoreJSON,
+  http,
+  setStore,
+  setStoreJSON,
+  TOKEN_CYBERSOFT,
+  USER_LOGIN,
+  clearLocalStorage
+} from "../../utils/setting";
+import { AppDispatch, RootState } from "../../redux/configStore";
+import userReducer, { userLoginState } from "../../redux/Reducers/userReducer";
+import { isNull } from "lodash";
+
 
 type Props = {};
 
+interface userLogin {
+  // initialState: string
+  userLogin: string
+}
+
+
 export default function HeaderMenu({}: Props) {
+  // const initialState = {
+  //   userLogin: getStoreJSON(USER_LOGIN) || {},
+  // };
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { userLogin: userLogin } = useSelector(
+    (state: RootState) => state.userReducer
+  );
+  
+  // const result1 = (Object.keys(userLogin) as (keyof typeof userLogin)[]).find((key) => {
+  //   return userLogin[key] === '';
+  // });
+  
+
+  // const userLogin:userLogin  = useSelector<RootState, string>((state) => state.userLogin )
+
+  // const isLoggedIn = useSelector<RootState, boolean>(state => state.USER_LOGIN);
+  // const { userLogin } = useSelector((st)
+
+  // const userRole = JSON.parse(localStorage.getItem(USER_LOGIN) || '{}')?.user.role
+
   const navigate = useNavigate();
   // usestate responsive
   const [isHidden, setIsHidden] = useState(true);
@@ -15,31 +57,52 @@ export default function HeaderMenu({}: Props) {
       className="w-60 rounded-xl py-2.5 mt-2.5 shadow-b-3"
       items={[
         {
-          key: "1",
+          key: '1',
           label: (
-            <p
-              className="text-base font-medium m-0"
-              onClick={() => navigate("/register")}
-            >
-              Đăng ký
-            </p>
-          ),
+            <>
+              {Object.keys(userLogin).length !== 0 ? <>
+                <p onClick={() => navigate('/profile')} className="text-base font-medium m-0">{`Hello ${userLogin?.user.name}`}</p>
+                <p onClick={() => navigate('/history')} className="text-base  mt-3">Lịch sử đặt vé</p>
+              </> : <p onClick={() => navigate('/register')} className="text-base font-medium m-0">Đăng ký</p>}
+            </>
+            // 
+          )
         },
+
+
         {
-          key: "2",
+          key: '2',
           label: (
-            <p
-              onClick={() => navigate("/login")}
-              className="text-base m-0 py-1 border-r"
-              // style={{ borderBottom: "1px solid #ccc" }}
-            >
-              Đăng nhập
-            </p>
-          ),
+            <>
+              {Object.keys(userLogin).length !== 0 ? <p onClick={() => {
+                localStorage.removeItem(USER_LOGIN);
+                localStorage.removeItem(ACCESS_TOKEN)
+                navigate('/')
+                window.location.reload()
+              }} style={{ borderBottom: '1px solid #ccc' }} className="text-base   m-0 pb-2 pt-2">Đăng xuất</p> : <p onClick={() => navigate('/login')} className="text-base   m-0 pb-4 pt-3" style={{ borderBottom: '1px solid #ccc' }}>
+                Đăng nhập
+              </p>}
+            </>
+          )
         },
+
+
         {
-          key: "3",
-          label: <p className="text-base m-0 py-1">Đi đến trang quản trị</p>,
+          key: '3',
+          label: (
+            <p 
+            onClick={() => {
+              if (userLogin?.user.role === 'ADMIN') {
+                navigate('/regester');
+              } else {
+                navigate('/')
+                alert('Bạn không có quyền truy cập')
+              }
+            }} 
+            className="text-base m-0 py-1" >
+              Đi đến trang quản trị
+            </p>
+          )
         },
         {
           key: "4",

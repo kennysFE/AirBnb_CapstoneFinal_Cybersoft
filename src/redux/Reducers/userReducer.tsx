@@ -13,6 +13,7 @@ import {
 import { AppDispatch } from "../configStore";
 
 interface userLogin {
+  user: string;
   id?: number;
   name?: string;
   email?: string;
@@ -31,10 +32,10 @@ type UpdateUser = {
   phone: string;
 };
 export interface userLoginState {
-  userLogin: userLogin;
+  userLogin: userLogin ;
 }
-const initialState = {
-  userLogin: getStoreJSON(USER_LOGIN),
+const initialState: userLoginState = {
+  userLogin: getStoreJSON(USER_LOGIN) || {},
 };
 
 const userReducer = createSlice({

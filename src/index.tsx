@@ -41,10 +41,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <HistoryRouter history={history}>
         {/* <RouterProvider router={router} /> */}
         <Routes>
-          <Route path="" element={<HomeTemplate />}>
+          <Route path="/" element={<HomeTemplate />}>
             <Route index element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
 
             <Route path="detailRoom">
               <Route path=":id" element={<DetailRoom />} />
@@ -52,6 +50,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 
             <Route path="*" element={<Navigate to="" />} />
           </Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           <Route path="/admin/dashboard" element={<DashBoard />}></Route>
         </Routes>
       </HistoryRouter>

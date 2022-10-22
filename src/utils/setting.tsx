@@ -37,6 +37,7 @@ export const {
   getStore,
   setStoreJSON,
   getStoreJSON,
+  clearLocalStorage
 } = configs;
 
 export const TOKEN_CYBERSOFT =
