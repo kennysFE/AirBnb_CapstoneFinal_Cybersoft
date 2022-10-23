@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector , useDispatch } from 'react-redux';
 import { Dropdown, Menu } from "antd";
 import { FaBars, FaUserCircle } from "react-icons/fa";
@@ -20,37 +20,42 @@ import { isNull } from "lodash";
 
 type Props = {};
 
-interface userLogin {
-  // initialState: string
-  userLogin: string
+interface user {
+  user: string;
+  id?: number;
+  name?: string;
+  email?: string;
+  password?: string;
+  phone?: string;
+  birthday?: string;
+  gender?: boolean;
+  role?: string;
 }
 
 
 export default function HeaderMenu({}: Props) {
-  // const initialState = {
-  //   userLogin: getStoreJSON(USER_LOGIN) || {},
-  // };
-  const dispatch = useDispatch<AppDispatch>();
 
-  const { userLogin: userLogin } = useSelector(
+  const dispatch = useDispatch<AppDispatch>();
+  
+  const { userLogin } = useSelector(
     (state: RootState) => state.userReducer
   );
-  
-  // const result1 = (Object.keys(userLogin) as (keyof typeof userLogin)[]).find((key) => {
-  //   return userLogin[key] === '';
+
+  // useEffect(() => {
+  //   if (userLogin !== null) {
+  //     navigate("/");
+  //   }
   // });
+
+  const [user,setUser]=useState<user>(userLogin)
   
-
-  // const userLogin:userLogin  = useSelector<RootState, string>((state) => state.userLogin )
-
-  // const isLoggedIn = useSelector<RootState, boolean>(state => state.USER_LOGIN);
-  // const { userLogin } = useSelector((st)
-
-  // const userRole = JSON.parse(localStorage.getItem(USER_LOGIN) || '{}')?.user.role
 
   const navigate = useNavigate();
   // usestate responsive
   const [isHidden, setIsHidden] = useState(true);
+
+  useEffect(()=>{setUser(userLogin)},[userLogin])
+
 
   const menu = (
     <Menu
@@ -60,8 +65,8 @@ export default function HeaderMenu({}: Props) {
           key: '1',
           label: (
             <>
-              {Object.keys(userLogin).length !== 0 ? <>
-                <p onClick={() => navigate('/profile')} className="text-base font-medium m-0">{`Hello ${userLogin?.user.name}`}</p>
+              {Object.keys(userLogin).length !== 0 ?<>
+                <p onClick={() => {navigate('/profile'); window.location.reload()}} className="text-base font-medium m-0">{`Hello ${userLogin.user.name}`}</p>
                 <p onClick={() => navigate('/history')} className="text-base  mt-3">Lịch sử đặt vé</p>
               </> : <p onClick={() => navigate('/register')} className="text-base font-medium m-0">Đăng ký</p>}
             </>
@@ -93,7 +98,7 @@ export default function HeaderMenu({}: Props) {
             <p 
             onClick={() => {
               if (userLogin?.user.role === 'ADMIN') {
-                navigate('/regester');
+                navigate('/register');
               } else {
                 navigate('/')
                 alert('Bạn không có quyền truy cập')
@@ -127,7 +132,6 @@ export default function HeaderMenu({}: Props) {
           <div className="flex text-gray-500 items-center py-1 px-3">
             <FaBars className="text-lg mr-3" />
             <div>
-              {/* {" "} */}
               <img
                 className="rounded-full w-8 h-8"
                 src="https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -136,7 +140,6 @@ export default function HeaderMenu({}: Props) {
             </div>
             <div
               className="absolute top-t-113 z-10"
-              // style={{ top: "113%", zIndex: "2" }}
             ></div>
           </div>
         </Dropdown>

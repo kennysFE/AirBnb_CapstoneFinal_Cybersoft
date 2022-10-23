@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { history } from "../..";
+import { Navigate } from "react-router-dom";
+import { history } from "../../index";
 import {
   ACCESS_TOKEN,
   getStoreJSON,
@@ -11,6 +12,7 @@ import {
   USER_LOGIN,
 } from "../../utils/setting";
 import { AppDispatch } from "../configStore";
+
 
 interface userLogin {
   user: string;
@@ -32,7 +34,7 @@ type UpdateUser = {
   phone: string;
 };
 export interface userLoginState {
-  userLogin: userLogin ;
+  userLogin: userLogin  ;
 }
 const initialState: userLoginState = {
   userLogin: getStoreJSON(USER_LOGIN) || {},
@@ -77,6 +79,12 @@ export const postSignin = (data: userLogin) => {
       setStore(ACCESS_TOKEN, result.data.content.token);
       // Lưu lại email
       setStoreJSON(USER_LOGIN, result.data.content);
+      // Thay đổi page menu     
+      history.replace({
+        pathname:'/'
+       })
+       window.location.reload();
+
     } catch (error: any) {
       let err = error.response.data.content;
       alert(err);

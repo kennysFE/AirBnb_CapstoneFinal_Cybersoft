@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaSearch, FaFacebookF } from "react-icons/fa";
 import {
@@ -9,13 +9,17 @@ import {
 import classNames from "classnames";
 import HeaderMenu from "./HeaderMenu";
 import HeaderSearch from "../HeaderSearch/HeaderSearch";
+import { useSelector } from "react-redux";
 
 type Props = {}
 
 export default function HeaderPage({}: Props) {
     const [showLanguages, setShowLanguages] = useState(false);
     const [searchVisible, setSearchVisible] = useState(false);
+    const {useLogin} = useSelector(state=> state.userReducer)
     const navigate = useNavigate();
+
+   useEffect(()=>{},[])
   
     return (
       <>
