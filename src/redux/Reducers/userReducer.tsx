@@ -15,7 +15,7 @@ import { AppDispatch } from "../configStore";
 
 
 interface userLogin {
-  user: string;
+  // user: string;
   id?: number;
   name?: string;
   email?: string;
@@ -33,6 +33,11 @@ type UpdateUser = {
   gender: boolean;
   phone: string;
 };
+
+interface UserSignIn {
+  email?: string;
+  password?: string;
+}
 export interface userLoginState {
   userLogin: userLogin  ;
 }
@@ -70,7 +75,7 @@ export const postSignupUser = (data: userLogin) => {
 };
 
 // Call api  post signin
-export const postSignin = (data: userLogin) => {
+export const postSignin = (data: UserSignIn) => {
   return async (dispatch: AppDispatch) => {
     try {
       let result = await http.post("/auth/signin", data);

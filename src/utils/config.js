@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {history} from '../main'
+import {history} from '../index'
 export const configs = {
     setStore: (name, values) => {
         localStorage.setItem(name, values);
