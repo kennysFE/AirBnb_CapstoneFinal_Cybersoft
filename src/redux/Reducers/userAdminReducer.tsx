@@ -13,6 +13,7 @@ import { AppDispatch } from "../configStore";
 // import { nguoiDungModel } from "../models/nguoiDungModel";
 
 export interface userAll {
+  id : number;
   name: string;
   email: string;
   password: string;
@@ -23,8 +24,11 @@ export interface userAll {
   role: string;
 }
 
-const initialState: any = {
-  userLogin: getStoreJSON(USER_LOGIN),
+export interface arrUser {
+  arrUser: userAll[];
+}
+
+const initialState: arrUser = {
   arrUser: [],
 };
 
@@ -32,18 +36,13 @@ const userAdminReducer = createSlice({
   name: "userAdminReducer",
   initialState,
   reducers: {
-    logOutUserAction: (state, action: PayloadAction<userAll>) => {
-      console.log(action.payload);
-      localStorage.clear();
-      state.userLogin = null;
-    },
     getAllUserAction: (state, action: PayloadAction<userAll[]>) => {
       state.arrUser = action.payload;
     },
   },
 });
 
-export const { logOutUserAction, getAllUserAction } = userAdminReducer.actions;
+export const { getAllUserAction } = userAdminReducer.actions;
 
 export default userAdminReducer.reducer;
 

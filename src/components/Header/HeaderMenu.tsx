@@ -21,7 +21,7 @@ import { isNull } from "lodash";
 type Props = {};
 
 interface user {
-  user: string;
+  // user: string;
   id?: number;
   name?: string;
   email?: string;
@@ -84,7 +84,7 @@ export default function HeaderMenu({}: Props) {
                 localStorage.removeItem(ACCESS_TOKEN)
                 navigate('/')
                 window.location.reload()
-              }} style={{ borderBottom: '1px solid #ccc' }} className="text-base   m-0 pb-2 pt-2">Đăng xuất</p> : <p onClick={() => navigate('/login')} className="text-base   m-0 pb-4 pt-3" style={{ borderBottom: '1px solid #ccc' }}>
+              }} style={{ borderBottom: '1px solid #ccc' }} className="text-base m-0 pb-2 pt-2">Đăng xuất</p> : <p onClick={() => navigate('/login')} className="text-base   m-0 pb-4 pt-3" style={{ borderBottom: '1px solid #ccc' }}>
                 Đăng nhập
               </p>}
             </>

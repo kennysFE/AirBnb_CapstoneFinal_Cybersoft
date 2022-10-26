@@ -15,6 +15,7 @@ import { AppDispatch } from "../configStore";
 
 
 interface userLogin {
+  user: any;
   // user: string;
   id?: number;
   name?: string;
@@ -110,6 +111,7 @@ export const getUserAPi = (id: number) => {
     }
   };
 };
+
 export const getDatphongApi = (id: number) => {
   return async (dispatch: AppDispatch) => {
     try {
@@ -120,6 +122,9 @@ export const getDatphongApi = (id: number) => {
     }
   };
 };
+
+
+
 // call api put user
 export const putUseApi = (id: number, data: UpdateUser) => {
   return async (dispatch: AppDispatch) => {
