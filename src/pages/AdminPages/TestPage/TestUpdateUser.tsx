@@ -37,6 +37,7 @@ export default function updateuser(): JSX.Element {
   useEffect(() => {
     dispatch(getUserAPi(param.id));
   }, []);
+
   const onFinish = async (values: any) => {
     console.log(values);
     
@@ -57,6 +58,8 @@ export default function updateuser(): JSX.Element {
       });
     }
   };
+
+
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
@@ -78,6 +81,30 @@ export default function updateuser(): JSX.Element {
   };
 
   //
+
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 8 },
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 16 },
+    },
+  };
+  const tailFormItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 16,
+        offset: 8,
+      },
+    },
+  };
+
   console.log(userLogin);
 
   useEffect(() => {
@@ -102,8 +129,8 @@ export default function updateuser(): JSX.Element {
     <Form
       form={form}
       name="basic"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
+      labelCol={{ span: 4 }}
+      wrapperCol={{ span: 8 }}
       initialValues={{
         name: "",
         email: "",
@@ -169,16 +196,16 @@ export default function updateuser(): JSX.Element {
       </Form.Item>
       <Form.Item label="Hình ảnh">
         <Input type="file" onChange={hanldeChangeImage} />
-        <Image
+        {/* <Image
           src={image}
           style={{ padding: "50px" }}
-          alt="pic"
+          alt=""
           onChange={hanldeChangeImage}
-        />
+        /> */}
       </Form.Item>
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+      <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
-          Submit
+          UpdateUser 
         </Button>
       </Form.Item>
     </Form>

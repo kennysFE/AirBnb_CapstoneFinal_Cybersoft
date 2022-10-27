@@ -7,6 +7,7 @@ import {
   Select,
   Image,
   notification,
+  Radio
 } from "antd";
 import type { DatePickerProps } from "antd";
 import React, { useEffect, useState } from "react";
@@ -19,6 +20,8 @@ import {
   userCreateAdmin,
 } from "../../../redux/Reducers/userCreate";
 
+type SizeType = Parameters<typeof Form>[0]['size'];
+
 export default function ThemNguoiDung(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -30,6 +33,7 @@ export default function ThemNguoiDung(): JSX.Element {
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     console.log(moment(date).format("DD/MM/YYYY"));
   };
+
   const onFinish = async (values: any) => {
     values.birthday = values.birthday.format("DD/MM/YYYY");
     if (values) {
@@ -40,6 +44,8 @@ export default function ThemNguoiDung(): JSX.Element {
     }
     navigate("/admin/dashboard/userAdmin");
   };
+
+
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
@@ -50,6 +56,7 @@ export default function ThemNguoiDung(): JSX.Element {
     console.log(`selected ${value}`);
   };
 
+
   const hanldeChangeImage = (event: any) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -59,6 +66,31 @@ export default function ThemNguoiDung(): JSX.Element {
       setSendfile(file);
     };
   };
+
+
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 8 },
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 16 },
+    },
+  };
+  const tailFormItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 16,
+        offset: 8,
+      },
+    },
+  };
+
   let allowedDateFormats = [
     "DD/MM/YYYY",
     "D/M/YYYY",
@@ -71,10 +103,11 @@ export default function ThemNguoiDung(): JSX.Element {
 
   return (
     <Form
+      {...formItemLayout}
       form={form}
       name="basic"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
+      labelCol={{ span: 4 }}
+      wrapperCol={{ span: 8 }}
       initialValues={{
         name: "",
         email: "",
@@ -84,10 +117,12 @@ export default function ThemNguoiDung(): JSX.Element {
         avatar: "",
         gender: false,
         role: true,
+        
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
+      // style={{fontSize:'30px'}}
     >
       <Form.Item
         label="Họ và tên"
@@ -129,6 +164,7 @@ export default function ThemNguoiDung(): JSX.Element {
         label="Giới tính"
         name="gender"
         rules={[{ required: true, message: "Chưa chọn giới tính!" }]}
+        hasFeedback validateStatus="success"
       >
         <Select style={{ width: 120 }} onChange={handleChangeOne}>
           <Option value="true">Nam</Option>
@@ -147,15 +183,15 @@ export default function ThemNguoiDung(): JSX.Element {
       </Form.Item>
       <Form.Item label="Hình ảnh">
         <Input type="file" onChange={hanldeChangeImage} />
-        <Image
+        {/* <Image
           src={image}
           style={{ padding: "50px" }}
           alt="pic"
           onChange={hanldeChangeImage}
-        />
+        /> */}
       </Form.Item>
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
+      <Form.Item {...tailFormItemLayout}>
+        <Button type="primary" htmlType="submit" >
           Submit
         </Button>
       </Form.Item>

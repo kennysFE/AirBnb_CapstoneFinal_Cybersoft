@@ -60,7 +60,7 @@ function getItem(
       }
         break;
       case '2': {
-        navigate('roomAdmin')
+        navigate('userAdmin/createuser')
 
       }
         break;
@@ -74,9 +74,9 @@ function getItem(
 
       // }
       //   break;
-      // case '9': {
-      //   navigate('room-manage')
-      // }
+      case '9': {
+        navigate('roomAdmin')
+      }
       //   break;
 
       default: { }
@@ -115,18 +115,18 @@ function getItem(
   const items: MenuItem[] = [
     getItem('Quản lí người dùng', 'sub1', <FiUser />, [
       getItem('Danh sách người dùng', '1'),
-      getItem('Danh sach phong', '2')
+      getItem('Them nguoi dung', '2')
 
     ]),
-    // getItem('Quản lí vị trí', 'sub2', <MdShareLocation />, [
-    //   getItem('Danh sách vị trí', '5'),
-    //   getItem('Thêm vị trí', '6'),
+    getItem('Quản lí vị trí', 'sub2', <MdShareLocation />, [
+      getItem('Danh sách vị trí', '2'),
+      getItem('Thêm vị trí', '6'),
 
-    // ]),
-    // getItem('Quản lí phòng', 'sub3', <BsHouseDoor />, [
-    //   getItem('Danh sách phòng', '9'),
+    ]),
+    getItem('Quản lí phòng', 'sub3', <BsHouseDoor />, [
+      getItem('Danh sách phòng', '9'),
 
-    // ]),
+    ]),
   ];
   // const userRole = JSON.parse(localStorage.getItem(USER_LOGIN)).user.role
 
