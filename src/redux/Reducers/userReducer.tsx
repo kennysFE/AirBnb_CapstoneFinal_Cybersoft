@@ -133,7 +133,7 @@ export const putUseApi = (id: number, data: UpdateUser) => {
       console.log({ result });
       //Chuyển về trang profile
       // history.push("/profile");
-      window.location.reload();
+      // window.location.reload();
       let action = setUserLogin(result.data.content);
       dispatch(action);
     } catch (error) {

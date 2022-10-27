@@ -98,7 +98,7 @@ export default function HeaderMenu({}: Props) {
             <p 
             onClick={() => {
               if (userLogin?.user.role === 'ADMIN') {
-                navigate('/register');
+                navigate('/admin/dashboard');
               } else {
                 navigate('/')
                 alert('Bạn không có quyền truy cập')

@@ -34,7 +34,8 @@ import DashBoard from "./pages/AdminPages/Dashboard/DashBoard";
 import Register from "./pages/Register/Register";
 import RoomManagement from "./pages/AdminPages/TestPage/RoomManage";
 import UserManagement from "./pages/AdminPages/TestPage/UserManage";
-import ThemNguoiDung from "./pages/AdminPages/TesTCreateUser";
+import ThemNguoiDung from "./pages/AdminPages/TestPage/TesTCreateUser";
+import UpdateUser from "./pages/AdminPages/TestPage/TestUpdateUser";
 // import HomeTemplate from "./templates/HomeTemplate";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
@@ -57,11 +58,13 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <Route path="/register" element={<Register />} />
 
             {/* Testing page admin  */}
-            <Route path="/userAdmin" element={<UserManagement />} />
-            <Route path="/roomAdmin" element={<RoomManagement />} />
-            <Route path="/createuser" element={<ThemNguoiDung />} />
 
-          <Route path="/admin/dashboard" element={<DashBoard />}></Route>
+          <Route path="/admin/dashboard" element={<DashBoard />}>
+            <Route path="userAdmin" element={<UserManagement />} />
+            <Route path="roomAdmin" element={<RoomManagement />} />
+            <Route path="userAdmin/createuser" element={<ThemNguoiDung />} />
+            <Route path="userAdmin/updateuser/:id" element={<UpdateUser />} />
+          </Route>
         </Routes>
       </HistoryRouter>
     </Provider>

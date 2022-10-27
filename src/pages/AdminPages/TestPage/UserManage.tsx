@@ -62,7 +62,7 @@ export default function UserManagement(): JSX.Element {
       setLoadings((prevLoadings) => {
         const newLoadings = [...prevLoadings];
         newLoadings[index] = false;
-        navigate("/createuser");
+        navigate("createuser");
         return newLoadings;
       });
     }, 1000);
@@ -175,7 +175,7 @@ export default function UserManagement(): JSX.Element {
           <div className="flex justify-center text-white">
             <span onClick={() => {
 
-              // navigate(`edit-admin/${name?._id}`)
+              navigate(`updateuser/${id}`)
 
 
             }} className="inline-block py-1 px-2 bg-green-500 rounded-md cursor-pointer transition-all duration-300 hover:bg-green-600 mx-2 ">Xem & Sửa</span>
