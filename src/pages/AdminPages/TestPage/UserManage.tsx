@@ -1,10 +1,6 @@
 import { Table, Input, Space, Button } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import React, { useEffect, useState } from "react";
-// import {
-//   deleteUserAction,
-//   fetchUsersSearchListAction,
-// } from "../../store/reducers/usersListReducer";
 import { AppDispatch, RootState } from "../../../redux/configStore";
 import {
   EditOutlined,
@@ -14,7 +10,6 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserApi } from "../../../redux/Reducers/userAdminReducer"
 import { deleteUserApi } from "../../../redux/Reducers/userCreate";
-// import { getAllRoom } from "../../../redux/Reducers/roomReducer";
 // import {
 //   fetchUsersListAction,
 //   fetchUsersListByPageAction,

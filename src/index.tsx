@@ -38,6 +38,9 @@ import ThemNguoiDung from "./pages/AdminPages/TestPage/TesTCreateUser";
 import UpdateUser from "./pages/AdminPages/TestPage/TestUpdateUser";
 import CreateRoom from "./pages/AdminPages/TestPage/TesTCreateRoom";
 import UpdateRoom from "./pages/AdminPages/TestPage/TesTUpdateRoom";
+import LocationManagement from "./pages/AdminPages/TestPage/locationMange";
+import CreateLocation from "./pages/AdminPages/TestPage/TestCreateLocation";
+import UpdateLocation from "./pages/AdminPages/TestPage/TestUpdateLocation";
 // import HomeTemplate from "./templates/HomeTemplate";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
@@ -64,10 +67,18 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Route path="/admin/dashboard" element={<DashBoard />}>
             <Route path="userAdmin" element={<UserManagement />} />
             <Route path="roomAdmin" element={<RoomManagement />} />
+            <Route path="locationAdmin" element={<LocationManagement />} />
+
             <Route path="userAdmin/createuser" element={<ThemNguoiDung />} />
             <Route path="userAdmin/updateuser/:id" element={<UpdateUser />} />
+
             <Route path="roomAdmin/createroom" element={<CreateRoom />} />
             <Route path="roomAdmin/updateroom/:id" element={<UpdateRoom />} />
+
+            <Route path="locationAdmin/createlocation" element={<CreateLocation />} />
+            <Route path="locationAdmin/updatelocation/:id" element={<UpdateLocation />} />
+
+
           </Route>
         </Routes>
       </HistoryRouter>

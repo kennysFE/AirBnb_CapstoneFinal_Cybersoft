@@ -58,16 +58,16 @@ export default function DashBoard({}: Props) {
           navigate("userAdmin/createuser");
         }
         break;
-      // case '5': {
-      //   navigate('location?page=1')
+      case '5': {
+        navigate('locationAdmin')
 
-      // }
-      //   break;
-      // case '6': {
-      //   navigate('location/add-location')
+      }
+        break;
+      case '6': {
+        navigate('locationAdmin/createlocation')
 
-      // }
-      //   break;
+      }
+        break;
       case "9": {
         navigate("roomAdmin");
       }
