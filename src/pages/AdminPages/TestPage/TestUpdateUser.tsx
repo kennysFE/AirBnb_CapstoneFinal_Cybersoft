@@ -40,7 +40,6 @@ export default function updateuser(): JSX.Element {
 
   const onFinish = async (values: any) => {
     console.log(values);
-    
     values.birthday = values.birthday.format("DD/MM/YYYY");
     values.id = param.id;
     try {

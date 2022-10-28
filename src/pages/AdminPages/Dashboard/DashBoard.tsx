@@ -71,7 +71,11 @@ export default function DashBoard({}: Props) {
       case "9": {
         navigate("roomAdmin");
       }
-      //   break;
+        break;
+      case "10": {
+        navigate("roomAdmin/createroom");
+      }
+        break;
 
       default: {
       }
@@ -121,6 +125,7 @@ export default function DashBoard({}: Props) {
     ]),
     getItem("Quản lí phòng", "sub3", <BsHouseDoor />, [
       getItem("Danh sách phòng", "9"),
+      getItem("Thêm phong", "10"),
     ]),
   ];
   // const userRole = JSON.parse(localStorage.getItem(USER_LOGIN)).user.role
@@ -172,11 +177,10 @@ export default function DashBoard({}: Props) {
             <div>
               <span>
                 <FaBars className="text-3xl" />
-                
               </span>
+                {/* <p className="text-base font-medium m-0">{`Hello ${userLogin.user.name}`}</p> */}
             </div>
             <div className="flex items-center">
-              <span className="text-base font-medium m-3">{`Hello ${userLogin.user.name}`}</span>
               <Dropdown overlay={menu} placement="bottomRight" arrow>
                 <div className="h-10 w-10 rounded-full overflow-hidden cursor-pointer">
                   <img

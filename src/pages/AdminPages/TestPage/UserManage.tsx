@@ -174,9 +174,7 @@ export default function UserManagement(): JSX.Element {
         return (
           <div className="flex justify-center text-white">
             <span onClick={() => {
-
               navigate(`updateuser/${id}`)
-
 
             }} className="inline-block py-1 px-2 bg-green-500 rounded-md cursor-pointer transition-all duration-300 hover:bg-green-600 mx-2 ">Xem & Sửa</span>
             <span onClick={async () => {

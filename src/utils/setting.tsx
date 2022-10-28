@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { history } from "../index";
 
 export const configs = {
@@ -52,20 +52,21 @@ export const http = axios.create({
 //Cấu hình request
 
 http.interceptors.request.use(
-  (configs) => {
-    // Cấu hình tất cả header add thêm thuộc tính Authorization
-    configs.headers = {
-      ...configs.headers,
-      ["Authorization"]: `Bearer ${getStore(ACCESS_TOKEN)}`,
-      ["tokenCybersoft"]: TOKEN_CYBERSOFT,
-    };
-    return configs;
-  },
-  (err) => {
-    return Promise.reject(err);
-  }
-);
+  (config:AxiosRequestConfig)  => {
 
+      const token = getStore(ACCESS_TOKEN);
+      if( config.headers){
+          config.headers  = {
+              ['Token']: token,
+              ['TokenCybersoft']: TOKEN_CYBERSOFT
+          }
+      }
+      return config
+  },
+  error => {
+      Promise.reject(error)
+  }
+)
 /*
     StatusCode: Mã kết quả trả về do backend qui định
     200(Success): Kết quả trả về thành công

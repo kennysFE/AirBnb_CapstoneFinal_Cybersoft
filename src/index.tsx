@@ -36,6 +36,8 @@ import RoomManagement from "./pages/AdminPages/TestPage/RoomManage";
 import UserManagement from "./pages/AdminPages/TestPage/UserManage";
 import ThemNguoiDung from "./pages/AdminPages/TestPage/TesTCreateUser";
 import UpdateUser from "./pages/AdminPages/TestPage/TestUpdateUser";
+import CreateRoom from "./pages/AdminPages/TestPage/TesTCreateRoom";
+import UpdateRoom from "./pages/AdminPages/TestPage/TesTUpdateRoom";
 // import HomeTemplate from "./templates/HomeTemplate";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
@@ -64,6 +66,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <Route path="roomAdmin" element={<RoomManagement />} />
             <Route path="userAdmin/createuser" element={<ThemNguoiDung />} />
             <Route path="userAdmin/updateuser/:id" element={<UpdateUser />} />
+            <Route path="roomAdmin/createroom" element={<CreateRoom />} />
+            <Route path="roomAdmin/updateroom/:id" element={<UpdateRoom />} />
           </Route>
         </Routes>
       </HistoryRouter>
