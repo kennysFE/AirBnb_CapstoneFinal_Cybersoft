@@ -18,7 +18,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   createUserApi,
   userCreateAdmin,
-} from "../../../redux/Reducers/userCreate";
+} from "../../../redux/Reducers/userAdminReducer";
 
 type SizeType = Parameters<typeof Form>[0]['size'];
 

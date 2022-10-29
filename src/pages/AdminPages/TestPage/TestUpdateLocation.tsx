@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/configStore";
 import { useNavigate, useParams } from "react-router-dom";
-import { getlocationAPi, putlocationApi } from "../../../redux/Reducers/locationAction";
+import { getlocationApiID, putlocationApi } from "../../../redux/Reducers/locationReducer";
 
 export default function UpdateLocation(): JSX.Element {
   const [form] = Form.useForm();
@@ -13,10 +13,10 @@ export default function UpdateLocation(): JSX.Element {
   const [image, setImage] = useState<string>("");
   //   const [sendfile, setSendfile] = useState<string>();
   useEffect(() => {
-    dispatch(getlocationAPi(params.id));
+    dispatch(getlocationApiID(params.id));
   }, [params.id]);
   const { locationPut} = useSelector(
-    (state: RootState) => state.locationAction
+    (state: RootState) => state.locationReducer
   );
   useEffect(() => {
     if (locationPut) {

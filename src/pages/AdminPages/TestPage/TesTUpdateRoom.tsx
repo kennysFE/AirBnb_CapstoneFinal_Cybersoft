@@ -14,7 +14,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/configStore";
 import { useNavigate, useParams } from "react-router-dom";
-import { getRoomAPi, putRoomApi } from "../../../redux/Reducers/roomAction";
+import { getRoomAPiID, putRoomApi } from "../../../redux/Reducers/roomReducer";
 
 export default function UpdateRoom(): JSX.Element {
   const params: any = useParams();
@@ -24,9 +24,9 @@ export default function UpdateRoom(): JSX.Element {
   const [image, setImage] = useState<string>("");
   //
 
-  const { roomPut } = useSelector((state: RootState) => state.roomAction);
+  const { roomPut } = useSelector((state: RootState) => state.roomReducer);
   useEffect(() => {
-    dispatch(getRoomAPi(params.id));
+    dispatch(getRoomAPiID(params.id));
   }, [params.id]);
 
   useEffect(() => {

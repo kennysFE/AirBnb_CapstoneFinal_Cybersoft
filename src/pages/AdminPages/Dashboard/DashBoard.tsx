@@ -178,9 +178,9 @@ export default function DashBoard({}: Props) {
               <span>
                 <FaBars className="text-3xl" />
               </span>
-                {/* <p className="text-base font-medium m-0">{`Hello ${userLogin.user.name}`}</p> */}
             </div>
             <div className="flex items-center">
+              <p className="text-base font-medium mr-5">{`Hello ${userLogin.user.name}`}</p>
               <Dropdown overlay={menu} placement="bottomRight" arrow>
                 <div className="h-10 w-10 rounded-full overflow-hidden cursor-pointer">
                   <img

@@ -4,11 +4,7 @@ import userReducer from "./Reducers/userReducer";
 import userAdminReducer from "./Reducers/userAdminReducer";
 import roomReducer from "./Reducers/roomReducer";
 import userCreate from "./Reducers/userCreate";
-import roomCreate from "./Reducers/roomCreate";
-import roomAction from "./Reducers/roomAction";
 import locationReducer from "./Reducers/locationReducer";
-import locationCreate from "./Reducers/locationCreate";
-import locationAction from "./Reducers/locationAction";
 
 export const store = configureStore({
   reducer: {
@@ -17,11 +13,7 @@ export const store = configureStore({
     userAdminReducer: userAdminReducer,
     roomReducer: roomReducer,
     userCreate : userCreate,
-    roomCreate: roomCreate,
-    roomAction: roomAction,
     locationReducer: locationReducer,
-    locationCreate: locationCreate,
-    locationAction: locationAction,
   },
 });
 

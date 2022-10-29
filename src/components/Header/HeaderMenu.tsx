@@ -134,7 +134,7 @@ export default function HeaderMenu({}: Props) {
             <div>
               <img
                 className="rounded-full w-8 h-8"
-                src="https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=600"
+                src={userLogin.user?.avatar || "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=600" }
                 alt=""
               />
             </div>

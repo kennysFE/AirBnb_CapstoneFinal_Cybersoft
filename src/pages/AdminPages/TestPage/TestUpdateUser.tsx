@@ -13,7 +13,7 @@ import type { DatePickerProps } from "antd";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getUserAPi,putUseApi } from "../../../redux/Reducers/userReducer";
+import { getUserAPiID,putUseApi } from "../../../redux/Reducers/userAdminReducer";
 import { AppDispatch, RootState } from "../../../redux/configStore";
 
 
@@ -29,13 +29,13 @@ export default function updateuser(): JSX.Element {
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     // console.log(moment(date).format("DD/MM/YYYY"));
   };
-  const { userLogin } = useSelector(
-    (state: RootState) => state.userReducer
+  const { userUpdate } = useSelector(
+    (state: RootState) => state.userAdminReducer
   );
-  console.log(userLogin);
+  console.log(userUpdate);
 
   useEffect(() => {
-    dispatch(getUserAPi(param.id));
+    dispatch(getUserAPiID(param.id));
   }, []);
 
   const onFinish = async (values: any) => {
@@ -104,16 +104,16 @@ export default function updateuser(): JSX.Element {
     },
   };
 
-  console.log(userLogin);
+  console.log(userUpdate);
 
   useEffect(() => {
-    if (userLogin) {
+    if (userUpdate) {
       form.setFieldsValue({
-        ...userLogin,
-        birthday: moment(userLogin.birthday, "DD-MM-YYYY"),
+        ...userUpdate,
+        birthday: moment(userUpdate.birthday, "DD-MM-YYYY"),
       });
     }
-  }, [userLogin]);
+  }, [userUpdate]);
 
   let allowedDateFormats = [
     "DD/MM/YYYY",

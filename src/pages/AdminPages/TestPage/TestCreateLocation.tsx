@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/configStore";
-import { createLocationApi } from "../../../redux/Reducers/locationCreate";
+import { createLocationApi } from "../../../redux/Reducers/locationReducer";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateLocation(): JSX.Element {

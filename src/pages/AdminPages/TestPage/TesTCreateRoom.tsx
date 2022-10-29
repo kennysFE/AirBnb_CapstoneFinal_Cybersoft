@@ -12,7 +12,7 @@ import {
   import { useDispatch, useSelector } from "react-redux";
   import { AppDispatch, RootState } from "../../../redux/configStore";
   import { useNavigate } from "react-router-dom";
-  import { createRoomApi } from "../../../redux/Reducers/roomCreate";
+  import { createRoomApi } from "../../../redux/Reducers/roomReducer";
   
   export default function ThemPhong(): JSX.Element {
 

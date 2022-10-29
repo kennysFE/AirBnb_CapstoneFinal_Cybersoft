@@ -11,7 +11,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/configStore";
 import { getLocationApi } from "../../../redux/Reducers/locationReducer";
-import { deletelocationApi } from "../../../redux/Reducers/locationAction";
+import { deletelocationApi } from "../../../redux/Reducers/locationReducer";
 
 export default function LocationManagement(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();

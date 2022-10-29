@@ -11,7 +11,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/configStore"
 import { getRoomApi } from "../../../redux/Reducers/roomReducer";
-import { deleteRoomApi } from "../../../redux/Reducers/roomAction";
+import { deleteRoomApi } from "../../../redux/Reducers/roomReducer";
 
 
 export default function RoomManagement(): JSX.Element {

@@ -9,7 +9,7 @@ import {
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserApi } from "../../../redux/Reducers/userAdminReducer"
-import { deleteUserApi } from "../../../redux/Reducers/userCreate";
+import { deleteUserApi } from "../../../redux/Reducers/userAdminReducer";
 // import {
 //   fetchUsersListAction,
 //   fetchUsersListByPageAction,
