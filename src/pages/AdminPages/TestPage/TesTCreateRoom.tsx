@@ -8,6 +8,7 @@ import {
     InputNumber,
   } from "antd";
   import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
+  import {AiFillCheckCircle,AiFillCloseCircle } from "react-icons/ai"
   import React, { useState } from "react";
   import { useDispatch, useSelector } from "react-redux";
   import { AppDispatch, RootState } from "../../../redux/configStore";
@@ -118,8 +119,8 @@ import {
         >
           <Input />
         </Form.Item>
-        <Form.Item label="Máy giặt" name="mayGiat" valuePropName="checked">
-          <Switch checkedChildren="1" unCheckedChildren="0" />
+        <Form.Item label="Máy giặt" name="mayGiat" >
+         <Switch  />
         </Form.Item>
         <Form.Item label="Bàn Là" name="banLa" valuePropName="checked">
           <Switch checkedChildren="1" unCheckedChildren="0" />

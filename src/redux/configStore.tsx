@@ -3,7 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./Reducers/userReducer";
 import userAdminReducer from "./Reducers/userAdminReducer";
 import roomReducer from "./Reducers/roomReducer";
-import userCreate from "./Reducers/userCreate";
+// import userCreate from "./Reducers/userCreate";
 import locationReducer from "./Reducers/locationReducer";
 
 export const store = configureStore({
@@ -12,7 +12,7 @@ export const store = configureStore({
     // modalReducer: modalReducer,
     userAdminReducer: userAdminReducer,
     roomReducer: roomReducer,
-    userCreate : userCreate,
+    // userCreate : userCreate,
     locationReducer: locationReducer,
   },
 });
