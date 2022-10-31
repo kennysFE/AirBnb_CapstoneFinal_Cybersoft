@@ -205,17 +205,18 @@ export default function RoomManagement(): JSX.Element {
         direction="vertical"
         className="w-100 py-3"
       >
-        <Button
+        {/* <Button
           type="primary"
           loading={loadings[0]}
           onClick={() => enterLoading(0)}
         >
           Thêm phòng
-        </Button>
+        </Button> */}
         <Search
           placeholder="Nhập tên phòng cần tìm"
           onSearch={onSearch}
           enterButton
+          allowClear
         />
       </Space>
       <Table

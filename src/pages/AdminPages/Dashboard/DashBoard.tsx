@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import type { MenuProps } from "antd";
-import { BsFillDoorOpenFill, BsHouseDoor } from "react-icons/bs";
+import { BsFillDoorOpenFill, BsHouseDoor, BsFillPersonLinesFill } from "react-icons/bs";
 import { FaBars } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -76,6 +76,10 @@ export default function DashBoard({}: Props) {
         navigate("roomAdmin/createroom");
       }
         break;
+      case "11": {
+        navigate("bookingAdmin");
+      }
+        break;
 
       default: {
       }
@@ -117,7 +121,7 @@ export default function DashBoard({}: Props) {
   const items: MenuItem[] = [
     getItem("Quản lí người dùng", "sub1", <FiUser />, [
       getItem("Danh sách người dùng", "1"),
-      getItem("Them nguoi dung", "2"),
+      getItem("Them người dùng", "2"),
     ]),
     getItem("Quản lí vị trí", "sub2", <MdShareLocation />, [
       getItem("Danh sách vị trí", "5"),
@@ -125,7 +129,10 @@ export default function DashBoard({}: Props) {
     ]),
     getItem("Quản lí phòng", "sub3", <BsHouseDoor />, [
       getItem("Danh sách phòng", "9"),
-      getItem("Thêm phong", "10"),
+      getItem("Thêm phòng", "10"),
+    ]),
+    getItem("Quản lí đặt phòng ", "sub4", <BsFillPersonLinesFill/>, [
+      getItem("Danh sách đặt phòng", "11"),
     ]),
   ];
   // const userRole = JSON.parse(localStorage.getItem(USER_LOGIN)).user.role

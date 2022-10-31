@@ -14,6 +14,6 @@ export default defineConfig({
   },
   define: {
     "global": {},
-  }
+  },
   // basis:'/capstone_react_shoes/'
 })

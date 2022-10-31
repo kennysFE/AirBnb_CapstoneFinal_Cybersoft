@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { history } from "../../index";
+import { history } from "../../App";
 import {
   ACCESS_TOKEN,
   getStoreJSON,
@@ -140,12 +140,29 @@ return async (dispatch: AppDispatch) => {
 }
 };
 
+//Api get User extend Id 
+
 export const getUserAPiID = (id: number) => {
   return async (dispatch: AppDispatch) => {
     try {
       let result = await http.get(`/users/${id}`);
       console.log({ result });
       let action = setUserUpdate(result.data.content);
+      dispatch(action);
+    } catch (err) {
+      console.log({ err });
+    }
+  };
+};
+
+// Api pagination users
+export const getPaginationUser = (page:Number) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const result = await http.get(`/users/phan-trang-tim-kiem?pageIndex=${page}&pageSize=10`);
+      const arrUser: userAll[] = result.data.content;
+      const action = getAllUserAction(arrUser);
+      console.log(result);
       dispatch(action);
     } catch (err) {
       console.log({ err });

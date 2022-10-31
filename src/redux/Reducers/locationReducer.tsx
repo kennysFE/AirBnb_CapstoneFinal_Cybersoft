@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { history } from "../../index";
+import { history } from "../../App";
 import {
   ACCESS_TOKEN,
   getStoreJSON,

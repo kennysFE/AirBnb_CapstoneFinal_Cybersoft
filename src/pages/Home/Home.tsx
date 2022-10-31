@@ -1,15 +1,14 @@
 import React from "react";
-import { CarouselHeader } from "../../components/Carousel/Carousel";
-import CarouselSlick from "../../components/Carousel/CarouselSlick";
-
+import CarouselComponent from "../../components/Carousel/CarouselComponent";
+import CarouselSearchByType from "../../components/Carousel/CarouselSearchByType";
 
 type Props = {};
 
 export default function Home({}: Props) {
   return (
     <>
-      <CarouselHeader />
-      <CarouselSlick />
+      <CarouselSearchByType />
+      <CarouselComponent />
     </>
   );
 }

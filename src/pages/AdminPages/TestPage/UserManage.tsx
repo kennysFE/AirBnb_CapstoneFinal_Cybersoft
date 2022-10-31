@@ -2,13 +2,10 @@ import { Table, Input, Space, Button } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import React, { useEffect, useState } from "react";
 import { AppDispatch, RootState } from "../../../redux/configStore";
-import {
-  EditOutlined,
-  DeleteOutlined,
-} from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserApi } from "../../../redux/Reducers/userAdminReducer"
+import { getUserApi, getPaginationUser } from "../../../redux/Reducers/userAdminReducer";
 import { deleteUserApi } from "../../../redux/Reducers/userAdminReducer";
 // import {
 //   fetchUsersListAction,
@@ -17,8 +14,6 @@ import { deleteUserApi } from "../../../redux/Reducers/userAdminReducer";
 // import { userDetailsActions } from "../../store/reducers/userDetailsReducer";
 // import { User } from "../../interfaces/user";
 
-
-
 export default function UserManagement(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
 
@@ -26,12 +21,10 @@ export default function UserManagement(): JSX.Element {
 
   const [searchState, setSearchState] = useState<DataType[]>([]);
 
-  const { arrUser } = useSelector(
-    (state: RootState) => state.userAdminReducer
-  );
+  const { arrUser } = useSelector((state: RootState) => state.userAdminReducer);
 
   // useEffect(() => {
-  //   dispatch(fetchUsersListByPageAction(1));
+  //   dispatch(getPaginationUser(1));
   //   dispatch(userDetailsActions.handleRemoveUserDetail(null));
   // }, []);
 
@@ -165,21 +158,28 @@ export default function UserManagement(): JSX.Element {
       title: "Tương tác",
       dataIndex: "tuongTac",
       width: "7%",
-      render: (id : number, name) => {
+      render: (id: number, name) => {
         return (
           <div className="flex justify-center text-white">
-            <span onClick={() => {
-              navigate(`updateuser/${id}`)
-
-            }} className="inline-block py-1 px-2 bg-green-500 rounded-md cursor-pointer transition-all duration-300 hover:bg-green-600 mx-2 ">Xem & Sửa</span>
-            <span onClick={async () => {
-              await dispatch(deleteUserApi(id));
-              window.location.reload();
-            }
-            }  
-            className="inline-block py-1 px-2 bg-red-500 rounded-md cursor-pointer transition-all duration-300 hover:bg-red-600">Xóa</span>
+            <span
+              onClick={() => {
+                navigate(`updateuser/${id}`);
+              }}
+              className="inline-block py-1 px-2 bg-green-500 rounded-md cursor-pointer transition-all duration-300 hover:bg-green-600 mx-2 "
+            >
+              Xem & Sửa
+            </span>
+            <span
+              onClick={async () => {
+                await dispatch(deleteUserApi(id));
+                window.location.reload();
+              }}
+              className="inline-block py-1 px-2 bg-red-500 rounded-md cursor-pointer transition-all duration-300 hover:bg-red-600"
+            >
+              Xóa
+            </span>
           </div>
-        )
+        );
       },
     },
   ];
@@ -227,17 +227,17 @@ export default function UserManagement(): JSX.Element {
   return (
     <>
       <Space
-        style={{ width: "100%" }}
+        // style={{ width: "100%" }}
         direction="vertical"
-        className="w-100 py-3"
+        className="w-1/2 py-3 rounded-sm"
       >
-        <Button
+        {/* <Button
           type="primary"
           loading={loadings[0]}
           onClick={() => enterLoading(0)}
         >
           Thêm người dùng
-        </Button>
+        </Button> */}
         <Search
           placeholder="Nhập họ tên cần tìm"
           onSearch={onSearch}
@@ -253,7 +253,7 @@ export default function UserManagement(): JSX.Element {
         //   pageSize: 10,
         //   total: 100,
         //   onChange: async (page) => {
-        //     await dispatch(fetchUsersListByPageAction(page));
+        //     await dispatch(getPaginationUser(page));
         //     setPageCurrent(page);
         //   },
         // }}

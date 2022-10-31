@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { history } from "../index";
+import { history } from "../App";
 
 export const configs = {
   setStore: (name: string, values: any) => {

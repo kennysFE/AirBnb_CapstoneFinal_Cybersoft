@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Tabs } from "antd";
-import { MdLocationOn } from "react-icons/md";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -76,7 +75,7 @@ export default function HeaderSearch(props: any) {
                   onClick={(e) => {
                     setPositionVisible(!positionVisible);
                   }}
-                  className=" w-full outline-none border-none "
+                  className=" w-full outline-none border-none focus:ring-0 "
                 />
               </div>
             }

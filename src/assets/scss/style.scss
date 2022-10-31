@@ -1,23 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@layer components{
-    .hoverDn {
-        @apply cursor-pointer transition-all duration-300
-    }
+
+
+@layer components {
+  .hoverDn {
+    @apply cursor-pointer transition-all duration-300;
+  }
 }
-
-
-
-
 
 @import "../scss/base/base";
 
-@import "../scss/components/Header/_HeaderMenu.scss";
-@import "../scss/components/Header/_HeaderPage.scss";
-@import "./components/HeaderSearch/_HeaderSearch.scss";
-@import "../scss/components/Carousel/Carousel.scss";
-@import "./components/Carousel/CarouselSlick.scss";
-@import "./Page/Login.scss";
-@import "./Page/Admin.scss"
-
+@import "../scss/Components/Header/_HeaderMenu.scss";
+@import "../scss/Components/Header/_HeaderPage.scss";
+@import "./Components/HeaderSearch/_HeaderSearch.scss";
+@import "./Components/Carousel/_CarouselSlick.scss";
+@import "../scss/components/Carousel/_Carousel.scss";
+@import "./Page/_Login.scss";
+@import "../scss/components/Hoc/_Hoc.scss";
+@import "../scss/Page/AdminPages/DashBoard/_DashBoard.scss";
+@import "../scss/Page/AdminPages/TestPage/Antd.scss"

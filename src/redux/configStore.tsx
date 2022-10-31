@@ -1,19 +1,22 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import modalReducer from "./Reducers/modalReducer";
+import modalReducer from "./Reducers/modalReducer";
 import userReducer from "./Reducers/userReducer";
 import userAdminReducer from "./Reducers/userAdminReducer";
 import roomReducer from "./Reducers/roomReducer";
-// import userCreate from "./Reducers/userCreate";
+import openModalReducer from "./Reducers/openModalReducer";
 import locationReducer from "./Reducers/locationReducer";
+import bookingReducer from "./Reducers/bookingRoomReducer";
+
 
 export const store = configureStore({
   reducer: {
     userReducer: userReducer,
-    // modalReducer: modalReducer,
+    modalReducer: modalReducer,
     userAdminReducer: userAdminReducer,
     roomReducer: roomReducer,
-    // userCreate : userCreate,
+    openModalReducer: openModalReducer,
     locationReducer: locationReducer,
+    bookingReducer: bookingReducer
   },
 });
 
