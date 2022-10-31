@@ -98,23 +98,23 @@ export const postSignin = (data: UserSignIn) => {
   };
 };
 // Call api get user
-// export const getUserAPi = (id: number) => {
-//   return async (dispatch: AppDispatch) => {
-//     try {
-//       let result = await http.get(`/users/${id}`);
-//       console.log({ result });
-//       let action = setUserLogin(result.data.content);
-//       dispatch(action);
-//     } catch (err) {
-//       console.log({ err });
-//     }
-//   };
-// };
+export const getUserProfileAPi = () => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      let result = await http.get(`/users/${getStoreJSON(USER_LOGIN).user.id}`);
+      console.log({ result });
+      let action = setUserLogin(result.data.content);
+      dispatch(action);
+    } catch (err) {
+      console.log({ err });
+    }
+  };
+};
 
 export const getDatphongApi = (id: number) => {
   return async (dispatch: AppDispatch) => {
     try {
-      let result = await http.get(`/dat-phong/lay-theo-nguoi-dung/${id}`);
+      let result = await http.get(`/dat-phong/lay-theo-nguoi-dung/${getStoreJSON(USER_LOGIN).user.id}`);
       console.log({ result });
     } catch (error) {
       console.log({ error });
@@ -123,20 +123,19 @@ export const getDatphongApi = (id: number) => {
 };
 
 
-
 // call api put user
-// export const putUseApi = (id: number, data: UpdateUser) => {
-//   return async (dispatch: AppDispatch) => {
-//     try {
-//       let result = await http.put(`/users/${id}`, data);
-//       console.log({ result });
-//       //Chuyển về trang profile
-//       // history.push("/profile");
-//       // window.location.reload();
-//       let action = setUserLogin(result.data.content);
-//       dispatch(action);
-//     } catch (error) {
-//       console.log({ error });
-//     }
-//   };
-// };
+export const putUseProfileApi = ( data: UpdateUser) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      let result = await http.put(`/users/${getStoreJSON(USER_LOGIN).user.id}`, data);
+      console.log({ result });
+      //Chuyển về trang profile
+      // history.push("/profile");
+      // window.location.reload();
+      let action = setUserLogin(result.data.content);
+      dispatch(action);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+};

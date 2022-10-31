@@ -33,6 +33,7 @@ import CreateLocation from "./pages/AdminPages/TestPage/CreateLocation";
 import UpdateLocation from "./pages/AdminPages/TestPage/UpdateLocation";
 import BookingManagement from "./pages/AdminPages/TestPage/BookingManage";
 import UpdateBooking from "./pages/AdminPages/TestPage/UpdateBooking";
+import Profile from "./pages/Profile/Profile";
 
 type Props = {};
 
@@ -45,6 +46,7 @@ export default function App({}: Props) {
           <Route path="/" element={<HomeTemplate />}>
             <Route index element={<Home />} />
 
+            <Route path="/Profile" element={<Profile />} />
             <Route path="detailRoom">
               <Route path=":id" element={<DetailPages />} />
             </Route>

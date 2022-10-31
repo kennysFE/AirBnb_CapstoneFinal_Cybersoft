@@ -41,7 +41,7 @@ export default function HeaderMenu({}: Props) {
                 <>
                   <p
                     onClick={() => {
-                      navigate("/profile");
+                      navigate("/Profile");
                       window.location.reload();
                     }}
                     className="text-base font-medium m-0"
