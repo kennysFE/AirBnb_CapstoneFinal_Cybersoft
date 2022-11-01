@@ -1,243 +1,58 @@
-import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Checkbox,
-  Form,
-  Input,
-  DatePicker,
-  Select,
-  Image,
-  notification,
-  Modal,
-} from "antd";
-import type { DatePickerProps } from "antd";
-import moment from "moment";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import {
-  getUserAPiID,
-  putUseApi,
-} from "../redux/Reducers/userAdminReducer";
-import { AppDispatch, RootState } from "../redux/configStore";
+import React from "react";
+import { useSelector } from "react-redux";
+import UpdateProfile from "../pages/Profile/UpdateProfile";
+import { RootState } from "../redux/configStore";
 
-export default function UpdateUser(): JSX.Element {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+type Props = {};
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-  const param: any = useParams();
-  const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
-  const [image, setImage] = useState<string>("");
-  const [sendfile, setSendfile] = useState<string>();
-  const [form] = Form.useForm();
-  const { Option } = Select;
-  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
-    // console.log(moment(date).format("DD/MM/YYYY"));
-  };
-  const { userUpdate } = useSelector(
-    (state: RootState) => state.userAdminReducer
-  );
-  console.log(userUpdate);
-
-  useEffect(() => {
-    dispatch(getUserAPiID(param.id));
-  }, []);
-
-  const onFinish = async (values: any) => {
-    console.log(values);
-    values.birthday = values.birthday.format("DD/MM/YYYY");
-    values.id = param.id;
-    try {
-      if (values) {
-        // Post APi
-        await dispatch(putUseApi(param.id, values));
-        notification.success({
-          message: "Cập nhật người dùng thành công",
-        });
-        window.location.reload
-      }
-    } catch (error) {
-      notification.error({
-        message: `${error}`,
-      });
-    }
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-  const handleChangeOne = (value: string) => {
-    console.log(`selected ${value}`);
-  };
-  const handleChangeTwo = (value: string) => {
-    console.log(`selected ${value}`);
-  };
-
-  const hanldeChangeImage = (event: any) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = (event: any) => {
-      setImage(event.target.result);
-      setSendfile(file);
-    };
-  };
-
-  //
-
-  const formItemLayout = {
-    labelCol: {
-      xs: { span: 24 },
-      sm: { span: 8 },
-    },
-    wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 16 },
-    },
-  };
-  const tailFormItemLayout = {
-    wrapperCol: {
-      xs: {
-        span: 24,
-        offset: 0,
-      },
-      sm: {
-        span: 16,
-        offset: 8,
-      },
-    },
-  };
-
-  console.log(userUpdate);
-
-  useEffect(() => {
-    if (userUpdate) {
-      form.setFieldsValue({
-        ...userUpdate,
-        birthday: moment(userUpdate.birthday, "DD-MM-YYYY"),
-      });
-    }
-  }, [userUpdate]);
-
-  let allowedDateFormats = [
-    "DD/MM/YYYY",
-    "D/M/YYYY",
-    "DD.MM.YYYY",
-    "D.M.YYYY",
-    "DD. MM. YYYY",
-    "D. M. YYYY",
-    "DD-MM-YYYY",
-  ];
+export default function ModalProfile({}: Props) {
+  const [showModal, setShowModal] = React.useState(false);
   return (
-    <Modal
-      title="Basic Modal"
-      open={isModalOpen}
-      onOk={handleOk}
-      onCancel={handleCancel}
-      footer={[
-        <Button key="back" onClick={handleCancel}>
-          Hủy
-        </Button>,
-      ]}
-    >
-      <Form
-        form={form}
-        name="basic"
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 8 }}
-        initialValues={{
-          name: "",
-          email: "",
-          password: "",
-          phone: "",
-          birthday: "",
-          avatar: "",
-          gender: false,
-          role: "",
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
+    <>
+      <p
+        className="bg-red-400 text-white active:bg-pink-600 font-bold uppercase text-sm px-3 py-3 mt-5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-3/5 text-center"
+        onClick={() => setShowModal(true)}
       >
-        <Form.Item
-          label="Họ và tên"
-          name="name"
-          rules={[{ required: true, message: "Chưa nhập tên!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[{ required: true, message: "Chưa nhập email!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Số điện thoại"
-          name="phone"
-          rules={[{ required: true, message: "Chưa nhập số điện thoại!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Ngày sinh"
-          name="birthday"
-          rules={[{ required: true, message: "Chưa nhập ngày sinh!" }]}
-        >
-          <DatePicker onChange={onChange} format={allowedDateFormats} />
-          {/* <Input /> */}
-        </Form.Item>
-        <Form.Item
-          label="Giới tính"
-          name="gender"
-          rules={[{ required: true, message: "Chưa chọn giới tính!" }]}
-        >
-          <Select style={{ width: 120 }} onChange={handleChangeOne}>
-            <Option value={true}>Nam</Option>
-            <Option value={false}>Nữ</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item
-          label="Loại người dùng"
-          name="role"
-          rules={[{ required: true, message: "Chưa chọn loại người dùng!" }]}
-        >
-          <Select style={{ width: 120 }} onChange={handleChangeTwo}>
-            <Option value="ADMIN">ADMIN</Option>
-            <Option value="USER">USER</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item label="Hình ảnh">
-          <Input type="file" onChange={hanldeChangeImage} />
-          {/* <Image
-          src={image}
-          style={{ padding: "50px" }}
-          alt=""
-          onChange={hanldeChangeImage}
-        /> */}
-        </Form.Item>
-        <Form.Item {...tailFormItemLayout}>
-          <Button
-            disabled={
-              !form.isFieldsTouched() ||
-              form.getFieldsError().some((ele) => ele.errors.length > 0)
-            }
-          >
-            SAVE
-          </Button>
-        </Form.Item>
-      </Form>
-    </Modal>
+        Chỉnh sửa hồ sơ
+      </p>
+      {showModal ? (
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-5/12 my-6 mx-auto max-w-5xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                  <h3 className="text-3xl font-semibold text-center">
+                    Cập nhật người dùng
+                  </h3>
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onClick={() => setShowModal(false)}
+                  >
+                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"></span>
+                  </button>
+                </div>
+                {/*body*/}
+                <div className="relative p-6 flex-auto">
+                  <UpdateProfile />
+                </div>
+                {/*footer*/}
+                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                  <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      ) : null}
+    </>
   );
 }

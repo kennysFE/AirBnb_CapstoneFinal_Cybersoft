@@ -14,23 +14,25 @@ type Props = {};
 
 export default function Profile({}: Props) {
   const dispatch = useDispatch<AppDispatch>();
-  const { userLogin } = useSelector((state: RootState) => state.userReducer);
+  const { userProfile } = useSelector((state: RootState) => state.userReducer);
+  console.log({userProfile});
 
-  // useEffect((id: number) => {
-  //     dispatch(getUserProfileAPi(id));
-  // }, []);
+  useEffect(() => {
+      dispatch(getUserProfileAPi());
+  }, []);
 
   return (
     <div>
+      
       <div className="2 xl:max-w-7xl mx-auto py-24 pt-28 flex justify-center">
         <div className="border-solid border-[5px] w-1/4 pt-10 rounded-xl">
           <div className="flex flex-col  items-center">
             <img
               src={
-                userLogin.user.avatar ||
+                // userProfile?.avatar ||
                 "https://a0.muscache.com/defaults/user_pic-225x225.png?v=3"
               }
-              alt={userLogin.user.name}
+              alt={userProfile?.name}
               className="rounded-full w-36 h-36"
             />
             <span className="underline pt-2 font-medium">Cập nhật ảnh</span>
@@ -49,7 +51,7 @@ export default function Profile({}: Props) {
               </button>
             </div>
             <div>
-              <h1>{userLogin.user.email} - Đã xác nhận</h1>
+              <h1>{userProfile?.email} - Đã xác nhận</h1>
               <div className="flex items-center">
                 <BsCheck className="text-2xl" />
                 <span className="pl-1">Địa chỉ email</span>
@@ -60,7 +62,7 @@ export default function Profile({}: Props) {
         <div className="px-20 w-3/5">
           <div className="leading-8 mx-auto">
             <h1 className="text-3xl font-semibold">
-              Xin Chào, tôi là {userLogin.user.name}
+              Xin Chào, tôi là {userProfile?.name}
             </h1>
             <span>Bắt đầu tham gia vào 2022</span>
             <div
@@ -75,7 +77,7 @@ export default function Profile({}: Props) {
                   >
                     Họ và tên :
                   </span>
-                  <span>{userLogin.user?.name}</span>
+                  <span>{userProfile?.name}</span>
                 </p>
                 <p className="text-base">
                   <span
@@ -84,7 +86,7 @@ export default function Profile({}: Props) {
                   >
                     Giới tính :{" "}
                   </span>
-                  <span>{userLogin.user?.gender ? "Nam" : "Nữ"}</span>
+                  <span>{userProfile?.gender ? "Nam" : "Nữ"}</span>
                 </p>
                 <p className="text-base">
                   <span
@@ -94,7 +96,7 @@ export default function Profile({}: Props) {
                     Ngày sinh :
                   </span>
                   <span>
-                    {dayjs(userLogin.user?.birthday).format("DD/MM/YYYY")}
+                    {dayjs(userProfile?.birthday).format("DD/MM/YYYY")}
                   </span>
                 </p>
                 <p className="text-base">
@@ -104,7 +106,7 @@ export default function Profile({}: Props) {
                   >
                     Email :
                   </span>
-                  <span>{userLogin.user?.email}</span>
+                  <span>{userProfile?.email}</span>
                 </p>
                 <p className="text-base">
                   <span
@@ -113,13 +115,11 @@ export default function Profile({}: Props) {
                   >
                     Điện thoại :
                   </span>
-                  <span>{userLogin.user?.phone}</span>
+                  <span>{userProfile?.phone}</span>
                 </p>
               </div>
-            </div>
-            <p className="underline font-semibold text-xl cursor-pointer pt-4">
-              Chỉnh sửa hồ sơ
-            </p>
+            </div >
+            <ModalProfile />
           </div>
 
           <div className="flex my-5 border-solid border-b-[1px]">

@@ -34,15 +34,26 @@ type UpdateUser = {
   phone: string;
 };
 
+interface userProfile {
+  name: string;
+  email: string;
+  birthday: string;
+  role: string;
+  gender: boolean;
+  phone: string;
+}
+
 interface UserSignIn {
   email?: string;
   password?: string;
 }
 export interface userLoginState {
-  userLogin: userLogin  ;
+  userLogin: userLogin | any  ;
+  userProfile: userProfile | any 
 }
 const initialState: userLoginState = {
   userLogin: getStoreJSON(USER_LOGIN) || {},
+  userProfile: {}
 };
 
 const userReducer = createSlice({
@@ -52,10 +63,13 @@ const userReducer = createSlice({
     setUserLogin: (state: userLoginState, action: PayloadAction<userLogin>) => {
       state.userLogin = action.payload;
     },
-  },
+    setUserProfile: (state: userLoginState, action: PayloadAction<userProfile>) => {
+      state.userProfile = action.payload;
+    }
+  }
 });
 
-export const { setUserLogin } = userReducer.actions;
+export const { setUserLogin,setUserProfile } = userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -101,9 +115,9 @@ export const postSignin = (data: UserSignIn) => {
 export const getUserProfileAPi = () => {
   return async (dispatch: AppDispatch) => {
     try {
-      let result = await http.get(`/users/${getStoreJSON(USER_LOGIN).user.id}`);
-      console.log({ result });
-      let action = setUserLogin(result.data.content);
+      let result5 = await http.get(`/users/${getStoreJSON(USER_LOGIN).user.id}`);
+      console.log({ result5 });
+      let action = setUserProfile(result5.data.content);
       dispatch(action);
     } catch (err) {
       console.log({ err });
@@ -124,14 +138,13 @@ export const getDatphongApi = (id: number) => {
 
 
 // call api put user
-export const putUseProfileApi = ( data: UpdateUser) => {
+export const putUseProfileApi = ( id: number, data: UpdateUser) => {
   return async (dispatch: AppDispatch) => {
     try {
-      let result = await http.put(`/users/${getStoreJSON(USER_LOGIN).user.id}`, data);
+      let result = await http.put(`/users/${id}`, data);
       console.log({ result });
       //Chuyển về trang profile
       // history.push("/profile");
-      // window.location.reload();
       let action = setUserLogin(result.data.content);
       dispatch(action);
     } catch (error) {

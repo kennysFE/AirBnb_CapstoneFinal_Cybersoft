@@ -34,6 +34,7 @@ import UpdateLocation from "./pages/AdminPages/TestPage/UpdateLocation";
 import BookingManagement from "./pages/AdminPages/TestPage/BookingManage";
 import UpdateBooking from "./pages/AdminPages/TestPage/UpdateBooking";
 import Profile from "./pages/Profile/Profile";
+import ModalProfile from "./HOC/ModalProfile";
 
 type Props = {};
 
@@ -55,6 +56,7 @@ export default function App({}: Props) {
           </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/test1" element={<ModalProfile />} />
 
             {/* Testing page admin  */}
           <Route path="/admin/dashboard" element={<DashBoard />}>

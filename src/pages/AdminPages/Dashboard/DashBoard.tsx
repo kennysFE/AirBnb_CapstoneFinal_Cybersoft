@@ -18,11 +18,13 @@ import {
   TOKEN_CYBERSOFT,
   USER_LOGIN,
 } from "../../../utils/setting";
-import { RootState } from "../../../redux/configStore";
+import { AppDispatch, RootState } from "../../../redux/configStore";
+import { getUserProfileAPi } from "../../../redux/Reducers/userReducer";
 
 type Props = {};
 
 export default function DashBoard({}: Props) {
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   type MenuItem = Required<MenuProps>["items"][number];
@@ -43,7 +45,14 @@ export default function DashBoard({}: Props) {
     } as MenuItem;
   }
 
-  const { userLogin } = useSelector((state: RootState) => state.userReducer);
+  const {userProfile} = useSelector(
+    (state: RootState) => state.userReducer
+  );
+  console.log(userProfile);
+
+  useEffect(() => {
+    dispatch(getUserProfileAPi());
+  }, []);
   // const { user } = JSON.parse(localStorage.getItem(USER_LOGIN))
 
   const onClick = (e: { key: any }) => {
@@ -187,13 +196,13 @@ export default function DashBoard({}: Props) {
               </span>
             </div>
             <div className="flex items-center">
-              <p className="text-base font-medium mr-5">{`Hello ${userLogin.user.name}`}</p>
+              <p className="text-base font-medium mr-5">{`Hello ${userProfile?.name}`}</p>
               <Dropdown overlay={menu} placement="bottomRight" arrow>
                 <div className="h-10 w-10 rounded-full overflow-hidden cursor-pointer">
                   <img
                     className="h-full w-full"
                     src={
-                      userLogin.user?.avatar ||
+                      userProfile?.avatar ||
                       "https://images.pexels.com/photos/13691873/pexels-photo-13691873.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
                     }
                     alt=""
