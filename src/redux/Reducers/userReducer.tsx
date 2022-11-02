@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { history } from "../../App";
 import { AppDispatch } from "../configStore";
-
-
 import {
   ACCESS_TOKEN,
   getStoreJSON,
@@ -11,7 +9,6 @@ import {
   setStoreJSON,
   USER_LOGIN,
 } from "../../utils/setting";
-
 
 interface userLogin {
   user: any;
@@ -24,6 +21,7 @@ interface userLogin {
   birthday?: string;
   gender?: boolean;
   role?: string;
+  avatar?: string;
 }
 type UpdateUser = {
   name: string;
@@ -41,19 +39,32 @@ interface userProfile {
   role: string;
   gender: boolean;
   phone: string;
+  avatar: string;
 }
 
 interface UserSignIn {
   email?: string;
   password?: string;
 }
+
+interface userBooking {
+  id: number;
+  maPhong: number;
+  ngayDen: string;
+  ngayDi: string;
+  soLuongKhach: number;
+  maNguoiDung: number;
+}
+
 export interface userLoginState {
-  userLogin: userLogin | any  ;
-  userProfile: userProfile | any 
+  userLogin: userLogin | any;
+  userProfile: userProfile | any;
+  userBooking: userBooking | any;
 }
 const initialState: userLoginState = {
   userLogin: getStoreJSON(USER_LOGIN) || {},
-  userProfile: {}
+  userProfile: {},
+  userBooking: [],
 };
 
 const userReducer = createSlice({
@@ -63,13 +74,17 @@ const userReducer = createSlice({
     setUserLogin: (state: userLoginState, action: PayloadAction<userLogin>) => {
       state.userLogin = action.payload;
     },
-    setUserProfile: (state: userLoginState, action: PayloadAction<userProfile>) => {
+    setUserProfile: ( state: userLoginState, action: PayloadAction<userProfile> ) => {
       state.userProfile = action.payload;
-    }
-  }
+    },
+    setUserBooking: (state: userLoginState,action: PayloadAction<userBooking[]> ) => {
+      state.userBooking = action.payload;
+    },
+  },
 });
 
-export const { setUserLogin,setUserProfile } = userReducer.actions;
+export const { setUserLogin, setUserProfile, setUserBooking } =
+  userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -98,12 +113,11 @@ export const postSignin = (data: UserSignIn) => {
       setStore(ACCESS_TOKEN, result.data.content.token);
       // Lưu lại email
       setStoreJSON(USER_LOGIN, result.data.content);
-      // Thay đổi page menu     
+      // Thay đổi page menu
       history.replace({
-        pathname:'/'
-       })
-       window.location.reload();
-
+        pathname: "/",
+      });
+      window.location.reload();
     } catch (error: any) {
       let err = error.response.data.content;
       alert(err);
@@ -115,7 +129,9 @@ export const postSignin = (data: UserSignIn) => {
 export const getUserProfileAPi = () => {
   return async (dispatch: AppDispatch) => {
     try {
-      let result5 = await http.get(`/users/${getStoreJSON(USER_LOGIN).user.id}`);
+      let result5 = await http.get(
+        `/users/${getStoreJSON(USER_LOGIN).user.id}`
+      );
       console.log({ result5 });
       let action = setUserProfile(result5.data.content);
       dispatch(action);
@@ -125,11 +141,14 @@ export const getUserProfileAPi = () => {
   };
 };
 
-export const getDatphongApi = (id: number) => {
+
+export const getBookingUserApi = () => {
   return async (dispatch: AppDispatch) => {
     try {
       let result = await http.get(`/dat-phong/lay-theo-nguoi-dung/${getStoreJSON(USER_LOGIN).user.id}`);
       console.log({ result });
+      let action = setUserBooking(result.data.content);
+      dispatch(action);
     } catch (error) {
       console.log({ error });
     }
@@ -137,8 +156,10 @@ export const getDatphongApi = (id: number) => {
 };
 
 
+
+
 // call api put user
-export const putUseProfileApi = ( id: number, data: UpdateUser) => {
+export const putUseProfileApi = (id: number, data: UpdateUser) => {
   return async (dispatch: AppDispatch) => {
     try {
       let result = await http.put(`/users/${id}`, data);
@@ -151,4 +172,24 @@ export const putUseProfileApi = ( id: number, data: UpdateUser) => {
       console.log({ error });
     }
   };
+};
+
+
+export const Updateavatar = (url: FormData) => {
+  console.log(url);
+return async (dispatch: AppDispatch) => {
+  try {
+    const result = await http.post("/users/upload-avatar", url);
+  //   let userPost: UserPost[] = result.data.content;
+    //LƯU TOKEN VÀO LOCALSTORE
+    // setStore(ACCESS_TOKEN, result.data.content.token); 
+    // Lưu lại email
+    setStoreJSON(USER_LOGIN, result.data.content.avatar);
+    // Thay đổi page menu
+    console.log(result);
+    // dispatch(action3);
+  } catch (err: any) {
+    console.log(err);
+  }
+};
 };
