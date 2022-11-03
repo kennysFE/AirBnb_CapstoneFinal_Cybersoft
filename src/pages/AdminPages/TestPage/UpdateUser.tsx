@@ -195,12 +195,12 @@ export default function UpdateUser(): JSX.Element {
       </Form.Item>
       <Form.Item label="Hình ảnh">
         <Input type="file" onChange={hanldeChangeImage} />
-        {/* <Image
+        <Image
           src={image}
           style={{ padding: "50px" }}
           alt=""
           onChange={hanldeChangeImage}
-        /> */}
+        />
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">

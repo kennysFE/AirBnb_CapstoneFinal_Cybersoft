@@ -8,14 +8,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import {
   getUserProfileAPi,
-  setUserBooking,
-  Updateavatar,
 } from "../../redux/Reducers/userReducer";
 import ModalProfile from "../../HOC/ModalProfile";
-import { Col } from "antd";
 import RoomItem from "./RoomProfile/RoomItem";
-import roomReducer, { roomActionAdmin } from "../../redux/Reducers/roomReducer";
-import { getRoomBookingApiID } from "../../redux/Reducers/bookingRoomReducer";
 import {
   ACCESS_TOKEN,
   getStoreJSON,
@@ -25,34 +20,17 @@ import {
   TOKEN_CYBERSOFT,
   USER_LOGIN,
 } from "../../utils/setting";
+import _ from "lodash";
+import UpdateAvatar from "./UpdateAvatar";
+// import { Updateavatar } from "../../redux/Reducers/userReducer";
 
 type Props = {};
 
 export default function Profile({}: Props) {
-  const fileRef:any = useRef();
-  const [avatar, setAvatar] = useState(getStoreJSON(USER_LOGIN).user.avatar);
+  // const params: any = useParams();
 
-  const { user } = getStoreJSON(USER_LOGIN);
-
-  const handleChangeAvatar = (e: any) => {
-    const file = e.target.files[0];
-    const fileReader = new FileReader();
-
-    fileReader.readAsDataURL(file);
-    fileReader.onload = (e: any) => {
-      const url = e.target.result;
-      setAvatar(url);
-      const formData = new FormData();
-      formData.append("avatar", file);
-      // dispatch(Updateavatar(formData));
-      // window.location.reload
-      useEffect(() => {
-        dispatch(Updateavatar(formData));
-      }, []);
-    };
-  };
-  const { userLogin } = useSelector((state: RootState) => state.userReducer);
   const dispatch = useDispatch<AppDispatch>();
+
   const { userProfile } = useSelector((state: RootState) => state.userReducer);
   console.log({ userProfile });
 
@@ -65,30 +43,7 @@ export default function Profile({}: Props) {
       <div className="2 xl:max-w-7xl mx-auto py-24 pt-28 flex justify-center">
         <div className="border-solid border-[5px] w-1/4 pt-10 rounded-xl">
           <div className="flex flex-col  items-center">
-            <div className=" mt-10   mx-auto">
-              <img
-                className="h-36 w-36 rounded-full"
-                src={avatar || userLogin?.avatar}
-                alt=""
-              />
-            </div>
-            <input accept="image/png,image/jpeg,image/gif" 
-             ref={fileRef}
-              type="file"
-              name=""
-              onChange={handleChangeAvatar}
-              className="hidden"
-              id=""
-            />
-            <p
-              onClick={() => fileRef.current.click()}
-              className="text-white rounded-md text-center mt-3 hover:bg-red-400 transition-all duration-300 cursor-pointer  p-3 inline-block mx-auto"
-              style={{ border: "1px solid #ff385c" }}
-            >
-              Đổi ảnh đại diện
-            </p>
-            <span className="underline pt-2 font-medium">Cập nhật ảnh</span>
-            
+            <UpdateAvatar />
           </div>
           <div className="px-5 pt-10 leading-10">
             <div>
@@ -185,6 +140,7 @@ export default function Profile({}: Props) {
             <p className="pb-7 font-medium">Đánh giá của bạn</p>
           </div>
           <RoomItem />
+
         </div>
       </div>
     </div>

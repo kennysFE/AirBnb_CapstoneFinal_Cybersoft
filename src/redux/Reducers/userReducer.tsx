@@ -39,7 +39,7 @@ interface userProfile {
   role: string;
   gender: boolean;
   phone: string;
-  avatar: string;
+  avatar: any;
 }
 
 interface UserSignIn {
@@ -74,10 +74,16 @@ const userReducer = createSlice({
     setUserLogin: (state: userLoginState, action: PayloadAction<userLogin>) => {
       state.userLogin = action.payload;
     },
-    setUserProfile: ( state: userLoginState, action: PayloadAction<userProfile> ) => {
+    setUserProfile: (
+      state: userLoginState,
+      action: PayloadAction<userProfile>
+    ) => {
       state.userProfile = action.payload;
     },
-    setUserBooking: (state: userLoginState,action: PayloadAction<userBooking[]> ) => {
+    setUserBooking: (
+      state: userLoginState,
+      action: PayloadAction<userBooking[]>
+    ) => {
       state.userBooking = action.payload;
     },
   },
@@ -141,11 +147,12 @@ export const getUserProfileAPi = () => {
   };
 };
 
-
 export const getBookingUserApi = () => {
   return async (dispatch: AppDispatch) => {
     try {
-      let result = await http.get(`/dat-phong/lay-theo-nguoi-dung/${getStoreJSON(USER_LOGIN).user.id}`);
+      let result = await http.get(
+        `/dat-phong/lay-theo-nguoi-dung/${getStoreJSON(USER_LOGIN).user.id}`
+      );
       console.log({ result });
       let action = setUserBooking(result.data.content);
       dispatch(action);
@@ -155,15 +162,13 @@ export const getBookingUserApi = () => {
   };
 };
 
-
-
-
 // call api put user
 export const putUseProfileApi = (id: number, data: UpdateUser) => {
   return async (dispatch: AppDispatch) => {
     try {
       let result = await http.put(`/users/${id}`, data);
       console.log({ result });
+      getStoreJSON(USER_LOGIN);
       //Chuyển về trang profile
       // history.push("/profile");
       let action = setUserLogin(result.data.content);
@@ -175,21 +180,5 @@ export const putUseProfileApi = (id: number, data: UpdateUser) => {
 };
 
 
-export const Updateavatar = (url: FormData) => {
-  console.log(url);
-return async (dispatch: AppDispatch) => {
-  try {
-    const result = await http.post("/users/upload-avatar", url);
-  //   let userPost: UserPost[] = result.data.content;
-    //LƯU TOKEN VÀO LOCALSTORE
-    // setStore(ACCESS_TOKEN, result.data.content.token); 
-    // Lưu lại email
-    setStoreJSON(USER_LOGIN, result.data.content.avatar);
-    // Thay đổi page menu
-    console.log(result);
-    // dispatch(action3);
-  } catch (err: any) {
-    console.log(err);
-  }
-};
-};
+
+

@@ -20,6 +20,7 @@ import {
 } from "../../../utils/setting";
 import { AppDispatch, RootState } from "../../../redux/configStore";
 import { getUserProfileAPi } from "../../../redux/Reducers/userReducer";
+import Profile from "../../Profile/Profile";
 
 type Props = {};
 
@@ -157,7 +158,7 @@ export default function DashBoard({}: Props) {
             <div className="h-12 w-12 rounded-xl overflow-hidden">
               <img
                 className="h-full w-full"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd-0CXiCSzYB7Qls6acs-5VZHEewRNH3DUyA&usqp=CAU"
+                src={ userProfile?.avatar|| "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd-0CXiCSzYB7Qls6acs-5VZHEewRNH3DUyA&usqp=CAU"} 
                 alt=""
               />
             </div>
