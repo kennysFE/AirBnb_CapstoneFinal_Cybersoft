@@ -56,15 +56,39 @@ interface userBooking {
   maNguoiDung: number;
 }
 
+// export interface roomUserList {
+//   id: number;
+//   tenPhong: string;
+//   khach: number;
+//   phongNgu: number;
+//   giuong: number;
+//   phongTam: number;
+//   moTa: string;
+//   giaTien: number;
+//   mayGiat: boolean;
+//   banLa: boolean;
+//   tivi: boolean;
+//   dieuHoa: boolean;
+//   wifi: boolean;
+//   bep: boolean;
+//   doXe: boolean;
+//   hoBoi: boolean;
+//   banUi: boolean;
+//   maViTri: number;
+//   hinhAnh: string;
+// }
+
 export interface userLoginState {
   userLogin: userLogin | any;
   userProfile: userProfile | any;
   userBooking: userBooking | any;
+  // roomUserList : roomUserList | any;
 }
 const initialState: userLoginState = {
   userLogin: getStoreJSON(USER_LOGIN) || {},
   userProfile: {},
   userBooking: [],
+  // roomUserList: [],
 };
 
 const userReducer = createSlice({
@@ -86,6 +110,9 @@ const userReducer = createSlice({
     ) => {
       state.userBooking = action.payload;
     },
+    // getRoomUserList: (state: userLoginState, action: PayloadAction<roomUserList[]>) => {
+    //   state.roomUserList = action.payload;
+    // },
   },
 });
 
@@ -150,11 +177,11 @@ export const getUserProfileAPi = () => {
 export const getBookingUserApi = () => {
   return async (dispatch: AppDispatch) => {
     try {
-      let result = await http.get(
+      let result3 = await http.get(
         `/dat-phong/lay-theo-nguoi-dung/${getStoreJSON(USER_LOGIN).user.id}`
       );
-      console.log({ result });
-      let action = setUserBooking(result.data.content);
+      console.log({ result3 });
+      let action = setUserBooking(result3.data.content);
       dispatch(action);
     } catch (error) {
       console.log({ error });
@@ -178,6 +205,20 @@ export const putUseProfileApi = (id: number, data: UpdateUser) => {
     }
   };
 };
+
+// export const getUserProfileRoomId = (id: any) => {
+//   return async (dispatch: AppDispatch) => {
+//     try {
+//       const result = await http.get(`/phong-thue/${id}`);
+//       let roomArray: roomList[] = result.data.content;
+//       const action = getDetailRoom(roomArray);
+//       console.log(result);
+//       dispatch(action);
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
+// };
 
 
 

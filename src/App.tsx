@@ -36,6 +36,7 @@ import UpdateBooking from "./pages/AdminPages/TestPage/UpdateBooking";
 import Profile from "./pages/Profile/Profile";
 import ModalProfile from "./HOC/ModalProfile";
 import RoomItem from "./pages/Profile/RoomProfile/RoomItem";
+import HeaderLocation from "./components/HeaderLocation/HeaderLocation";
 
 
 type Props = {};
@@ -48,6 +49,7 @@ export default function App({}: Props) {
         <Routes>
           <Route path="/" element={<HomeTemplate />}>
             <Route index element={<Home />} />
+            {/* <Route path="/test2" element={<HeaderLocation/>} /> */}
 
             <Route path="/Profile" element={<Profile />} />
             <Route path="detailRoom">
@@ -58,6 +60,7 @@ export default function App({}: Props) {
           </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/test1" element={<RoomItem />} />
 
           <Route path="/admin/dashboard" element={<DashBoard />}>
             <Route path="userAdmin" element={<UserManagement />} />
