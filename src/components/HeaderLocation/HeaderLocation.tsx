@@ -10,14 +10,14 @@ export default function HeaderLocation({}: Props) {
     const dispatch = useDispatch<AppDispatch>();
     const { locationList } = useSelector((state: RootState) => state.locationReducer)
     useEffect(() => {
-        dispatch(getLocationApi());
+        dispatch(getLocationApi())
       }, []);
 
     const renderPositionList = () => {
         return (
             <>
                 <div className="flex justify-between flex-wrap py-10">
-                    {locationList?.slice(0, 13).map((item: any , index: number) => {
+                    {locationList?.slice(0, 12).map((item: any , index: number) => {
                         return (
                             <HomeLocationItem key={index} location ={item} />
                         )

@@ -36,7 +36,6 @@ import UpdateBooking from "./pages/AdminPages/TestPage/UpdateBooking";
 import Profile from "./pages/Profile/Profile";
 import ModalProfile from "./HOC/ModalProfile";
 import RoomItem from "./pages/Profile/RoomProfile/RoomItem";
-import HeaderLocation from "./components/HeaderLocation/HeaderLocation";
 
 
 type Props = {};
@@ -49,7 +48,6 @@ export default function App({}: Props) {
         <Routes>
           <Route path="/" element={<HomeTemplate />}>
             <Route index element={<Home />} />
-            {/* <Route path="/test2" element={<HeaderLocation/>} /> */}
 
             <Route path="/Profile" element={<Profile />} />
             <Route path="detailRoom">
