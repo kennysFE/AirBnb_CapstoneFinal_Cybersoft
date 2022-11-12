@@ -14,10 +14,10 @@
 @import "./components//Header/HeaderPage";
 @import "./components/HeaderSearch/HeaderSearch";
 @import "./Components/Carousel/CarouselSlick";
-@import "./components/Carousel/Carousel";
-@import "./Page/_Login.scss";
-@import "../scss/components/Hoc/_Hoc.scss";
-@import "../scss/Page/AdminPages/DashBoard/_DashBoard.scss";
-@import "../scss/Page/AdminPages/TestPage/Antd.scss";
-@import "../scss/components/HeaderLocation/HeaderLocationItem";
-@import "../scss/pages/ChatBoxScss/ChatBox";
+// @import "./components/Carousel/Carousel";
+@import "./Page/Login";
+@import "./components/Hoc/Hoc";
+@import "./Page/AdminPages/DashBoard/DashBoard";
+@import "./Page/AdminPages/TestPage/Antd.scss";
+@import "./components/HeaderLocation/HeaderLocationItem";
+@import "./pages/ChatBoxScss/ChatBox";
