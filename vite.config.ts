@@ -15,5 +15,14 @@ export default defineConfig({
   define: {
     "global": {},
   },
+  resolve: {
+    alias: [
+        {
+            // this is required for the SCSS modules
+            find: /^~(.*)$/,
+            replacement: '$1',
+        },
+    ],
+},
   // basis:'/capstone_react_shoes/'
 })
