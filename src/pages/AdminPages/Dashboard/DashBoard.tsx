@@ -1,6 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
 import type { MenuProps } from "antd";
-import { BsFillDoorOpenFill, BsHouseDoor, BsFillPersonLinesFill } from "react-icons/bs";
+import {
+  BsFillDoorOpenFill,
+  BsHouseDoor,
+  BsFillPersonLinesFill,
+  BsFillChatDotsFill,
+} from "react-icons/bs";
 import { FaBars } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -21,6 +26,7 @@ import {
 import { AppDispatch, RootState } from "../../../redux/configStore";
 import { getUserProfileAPi } from "../../../redux/Reducers/userReducer";
 import Profile from "../../Profile/Profile";
+import { AiFillSignal } from "react-icons/ai";
 
 type Props = {};
 
@@ -46,9 +52,7 @@ export default function DashBoard({}: Props) {
     } as MenuItem;
   }
 
-  const {userProfile} = useSelector(
-    (state: RootState) => state.userReducer
-  );
+  const { userProfile } = useSelector((state: RootState) => state.userReducer);
   console.log(userProfile);
 
   useEffect(() => {
@@ -68,31 +72,44 @@ export default function DashBoard({}: Props) {
           navigate("userAdmin/createuser");
         }
         break;
-      case '5': {
-        navigate('locationAdmin')
+      case "5":
+        {
+          navigate("locationAdmin");
+        }
+        break;
+      case "6":
+        {
+          navigate("locationAdmin/createlocation");
+        }
+        break;
+      case "9":
+        {
+          navigate("roomAdmin");
+        }
+        break;
+      case "10":
+        {
+          navigate("roomAdmin/createroom");
+        }
+        break;
+      case "11":
+        {
+          navigate("bookingAdmin");
+        }
+        break;
+      case "12":
+        {
+          navigate("chat");
+        }
+        break;
+      case "13":
+        {
+          navigate("DashBoardInfor");
+        }
+        break;
 
-      }
+      default:
         break;
-      case '6': {
-        navigate('locationAdmin/createlocation')
-
-      }
-        break;
-      case "9": {
-        navigate("roomAdmin");
-      }
-        break;
-      case "10": {
-        navigate("roomAdmin/createroom");
-      }
-        break;
-      case "11": {
-        navigate("bookingAdmin");
-      }
-        break;
-
-      default: {
-      }
     }
   };
   const menu = (
@@ -129,6 +146,9 @@ export default function DashBoard({}: Props) {
     />
   );
   const items: MenuItem[] = [
+    getItem("Tổng quan", "Sub0", <AiFillSignal />, [
+      getItem("Thông tin tổng quan", "13"),
+    ]),
     getItem("Quản lí người dùng", "sub1", <FiUser />, [
       getItem("Danh sách người dùng", "1"),
       getItem("Them người dùng", "2"),
@@ -141,16 +161,17 @@ export default function DashBoard({}: Props) {
       getItem("Danh sách phòng", "9"),
       getItem("Thêm phòng", "10"),
     ]),
-    getItem("Quản lí đặt phòng ", "sub4", <BsFillPersonLinesFill/>, [
+    getItem("Quản lí đặt phòng ", "sub4", <BsFillPersonLinesFill />, [
       getItem("Danh sách đặt phòng", "11"),
     ]),
+    getItem("Tương tác người dùng ", "12", <BsFillChatDotsFill />),
   ];
   // const userRole = JSON.parse(localStorage.getItem(USER_LOGIN)).user.role
 
   return (
     <div className="grid grid-cols-12 admin ">
       <div className="col-span-2  ">
-        <div style={{ backgroundColor: "#343957", height: "100%" }}>
+        <div className="h-full admin_slidebar">
           <div
             className="h-20 px-5 py-4 flex items-center "
             style={{ boxShadow: " 0px 4px 12px rgba(0, 0, 0, 0.1)" }}
@@ -158,16 +179,12 @@ export default function DashBoard({}: Props) {
             <div className="h-12 w-12 rounded-xl overflow-hidden">
               <img
                 className="h-full w-full"
-                src={ userProfile?.avatar|| "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd-0CXiCSzYB7Qls6acs-5VZHEewRNH3DUyA&usqp=CAU"} 
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd-0CXiCSzYB7Qls6acs-5VZHEewRNH3DUyA&usqp=CAU"
                 alt=""
               />
             </div>
-
-            <span
-              className="text-4xl font-medium ml-3"
-              style={{ color: "#ff5a5e" }}
-            >
-              airbnb
+            <span className="text-2xl font-semibold ml-2 text-rose-400">
+              Airbnb Admin
             </span>
           </div>
           <div className="mt-10">
@@ -176,8 +193,8 @@ export default function DashBoard({}: Props) {
               style={{
                 width: 254,
               }}
-              defaultSelectedKeys={["1"]}
-              defaultOpenKeys={["sub1"]}
+              defaultSelectedKeys={["13"]}
+              defaultOpenKeys={["sub0"]}
               mode="inline"
               items={items}
             />
@@ -211,7 +228,7 @@ export default function DashBoard({}: Props) {
                 </div>
               </Dropdown>
               <span>
-                <IoMdArrowDropdown className="text-3xl" />
+                <IoMdArrowDropdown className="text-2xl" />
               </span>
             </div>
           </div>

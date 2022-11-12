@@ -12,6 +12,8 @@ import dayjs from "dayjs";
 import classNames from "classnames";
 import { AppDispatch } from "../../redux/configStore";
 import { postSignupUser } from "../../redux/Reducers/userReducer";
+import { getUserApi } from "../../redux/Reducers/userAdminReducer";
+import UseCheckEmail from "../../Hooks/UseCheckEmail"
 
 type Props = {};
 
@@ -27,14 +29,18 @@ interface Register {
 }
 
 export default function Register({}: Props) {
+  
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const [isShowPass, setIsShowPass] = useState(false);
   const [day, setDay] = useState("1/1/2022");
+  
+  useEffect(() => {
+    dispatch(getUserApi());
+  }, []);
+  
+  const { isExitEmail, handleCheckEmail } = UseCheckEmail();
 
-  //   useEffect(() => {
-  //     dispatch(getUserList());
-  //   }, []);
 
   const schema = object({
     email: string()
@@ -74,7 +80,7 @@ export default function Register({}: Props) {
     mode: "onTouched",
   });
 
-  const onSubmit = handleSubmit((values:any) => {
+  const onSubmit = handleSubmit((values: any) => {
     console.log(values);
     const action = postSignupUser(values);
     dispatch(action);
@@ -112,7 +118,7 @@ export default function Register({}: Props) {
               </div>
               <div className="h-24">
                 <input
-                  //   onInput={handleCheckEmail}
+                    onInput={handleCheckEmail}
                   {...register("email")}
                   type="text"
                   className="block border border-grey-light w-full p-3 rounded mb-0"
@@ -123,11 +129,11 @@ export default function Register({}: Props) {
                     {errors.email.message}
                   </p>
                 )}
-                {/* {!isExitEmail && (
+                {!isExitEmail && (
                   <p className="m-0 text-red-500 text-md italic text-left mt-2">
                     Email đã tồn tại
                   </p>
-                )} */}
+                )}
               </div>
               <div className="relative">
                 <input
@@ -211,6 +217,9 @@ export default function Register({}: Props) {
           <button
             type="submit"
             className="w-full text-center py-3 rounded bg-green-500 text-white text-lg hover:bg-green-dark focus:outline-none my-1"
+            onClick={() => {
+              navigate('/login/2');
+            }}
           >
             Create Account
           </button>
@@ -231,17 +240,19 @@ export default function Register({}: Props) {
             </a>
           </div>
         </div>
-        <div className="text-grey-dark mt-6 text-white">
-          Already have an account?
-          <a
-            className="no-underline border-b border-blue text-blue"
-            href="../login"
-          >
+        <div className="text-grey-dark mt-6 text-slate-700 text-xl">
+          <button className="mr-2">Already have an account?</button>
+          <button className="hover:text-blue-700"
+             onClick={()=>{
+              navigate('/login/2');
+             }}
+             >
             Log in
-          </a>
-          .
+          </button>
         </div>
       </div>
     </form>
   );
 }
+
+

@@ -28,11 +28,13 @@ export const configs = {
   },
   ACCESS_TOKEN: "accessToken",
   USER_LOGIN: "userLogin",
+  CURRENT_USER:"currentUser",
 };
 
 export const {
   ACCESS_TOKEN,
   USER_LOGIN,
+  CURRENT_USER,
   setStore,
   getStore,
   setStoreJSON,
@@ -58,7 +60,7 @@ http.interceptors.request.use(
       if( config.headers){
           config.headers  = {
               ['Token']: token,
-              ['TokenCybersoft']: TOKEN_CYBERSOFT
+              ['tokenCybersoft']: TOKEN_CYBERSOFT
           }
       }
       return config
@@ -81,7 +83,7 @@ http.interceptors.request.use(
 // // Cấu hình kết quả trả về
 http.interceptors.response.use(
   (response) => {
-    console.log(response);
+    // console.log(response);
     return response;
   },
   (err) => {
