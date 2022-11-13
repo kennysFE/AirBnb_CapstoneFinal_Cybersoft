@@ -8,5 +8,6 @@
 
 # Phân chia công việc nhóm. 
 Nguyễn Minh Hoàng : Login, Register, Profile, Admin, HeaderSearch, DashBoard
+
 Ngô Tấn Hỷ: Cấu trúc thư mục, Home, DetailLocation, DetailRoom , HomeTemplate, Carousel, HeaderMenu
    
