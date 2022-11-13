@@ -6,8 +6,9 @@
 # Công nghệ sử dụng 
    Reactjs, ReduxToolkit, Antd, ReactHook, Sass, Tailwind, Vite. 
 
-# Phân chia công việc nhóm. 
-Nguyễn Minh Hoàng : Login, Register, Profile, Admin, HeaderSearch, DashBoard
+# Phân chia công việc nhóm.
+Nguyễn Minh Hoàng : Login, Register, Profile, Admin, HeaderSearch, DashBoard.
 
-Ngô Tấn Hỷ: Cấu trúc thư mục, Home, DetailLocation, DetailRoom , HomeTemplate, Carousel, HeaderMenu
+Ngô Tấn Hỷ: Cấu trúc thư mục, Home, DetailLocation, DetailRoom , HomeTemplate, HeaderMenu.
+
    
